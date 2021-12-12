@@ -28,9 +28,7 @@ body {
 
 
 /*
-    Note: It is best to use a less version of this file ( see http://css2less.cc
-    For the media queries use @screen-sm-min instead of 768px.
-    For .omb_spanOr use @body-bg instead of white.
+    Login CSS
 */
 
 @media (min-width: 768px) {
@@ -52,9 +50,6 @@ opacity:0.9;
   color: white;
 opacity:1;    	
 }
-.omb_login .omb_socialButtons .omb_btn-facebook {background: #3b5998;}
-.omb_login .omb_socialButtons .omb_btn-twitter {background: #00aced;}
-.omb_login .omb_socialButtons .omb_btn-google {background: #c32f10;}
 
 
 .omb_login .omb_loginOr {
