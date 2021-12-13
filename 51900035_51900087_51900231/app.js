@@ -11,6 +11,23 @@ var usersRouter = require('./routes/users');
 var postsRouter = require('./routes/posts');
 
 var app = express();
+var session = require('express-session');
+var passport = require('passport');
+//….
+app.use(session({
+  resave: false,
+  saveUninitialized: true,
+  secret: 'SECRET'
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+var authRouter = require('./routes/auth');
+
+//..
+
+app.use('/auth', authRouter);
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
