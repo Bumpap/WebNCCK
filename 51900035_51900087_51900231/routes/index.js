@@ -10,6 +10,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var db = require('../db');
 
+var alert = require('alert')
 
 /* GET home page. */
 // router.get('/', function(req, res, next) {
@@ -27,6 +28,13 @@ router.post('/login', function (req, res, next) {
   if (req.body.username == "admin@gmail.com" && req.body.password == "123456") {
     req.session.user = req.body.username;
     res.render('index');
+  } else {
+    req.session.flash = {
+      type: 'danger',
+      intro: 'Validation error!',
+      message: 'Invalid email or password',
+    }
+    res.redirect('/login');
   }
 });
 router.get('/inf', function (req, res, next) {
