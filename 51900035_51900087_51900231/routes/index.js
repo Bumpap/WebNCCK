@@ -2,6 +2,14 @@ var express = require('express');
 var router = express.Router();
 var mongodb = require('mongodb');
 const Post = require('../models/Post')
+const bodyParser = require('body-parser')
+var createError = require('http-errors');
+var express = require('express');
+var path = require('path');
+var cookieParser = require('cookie-parser');
+var logger = require('morgan');
+var db = require('../db');
+
 
 /* GET home page. */
 // router.get('/', function(req, res, next) {
@@ -15,7 +23,12 @@ const Post = require('../models/Post')
 router.get('/login', function (req, res, next) {
   res.render('login');
 });
-
+router.post('/login', function (req, res, next) {
+  if (req.body.username == "admin@gmail.com" && req.body.password == "123456") {
+    req.session.user = req.body.username;
+    res.render('index');
+  }
+});
 router.get('/inf', function (req, res, next) {
   Post.find()
     .then(result => {
@@ -35,6 +48,7 @@ function isLoggedIn(req, res, next) {
     return next();
   res.redirect('/login');
 }
+
 
 /* GET home page. */
 router.get('/', isLoggedIn, function (req, res, next) {
