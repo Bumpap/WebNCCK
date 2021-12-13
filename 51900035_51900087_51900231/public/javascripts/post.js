@@ -1,4 +1,9 @@
 $(document).ready(function () {
+
+
+
+
+    
     document.getElementById("postBtn").onclick = function (e) {
         e.preventDefault();
         var a = document.getElementById('content').value

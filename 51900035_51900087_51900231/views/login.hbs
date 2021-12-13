@@ -16,8 +16,9 @@
 					<div class="input-group">
 						<input type="password" class="form-control" name="password" placeholder="Password">
 					</div>
-					{{!-- <span class="help-block">Password error</span> --}}
-
+					{{#if error}}
+					<span class="help-block">{{error}}</span>
+					{{/if}}
 
 					<button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
 				</form>

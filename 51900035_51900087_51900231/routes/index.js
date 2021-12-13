@@ -29,12 +29,21 @@ router.post('/login', function (req, res, next) {
     req.session.user = req.body.username;
     res.render('index');
   } else {
-    req.session.flash = {
-      type: 'danger',
-      intro: 'Validation error!',
-      message: 'Invalid email or password',
+    let error = undefined
+    if (req.body.username == '')
+    {
+      error = "Please fill your username"
     }
-    res.redirect('/login');
+
+    else if (req.body.password == ''){
+      error = "Please fill your password"
+    }
+
+    else
+      error = "Oops, something has been wrong"
+    res.locals.error=error
+    res.render('login',{error});
+    console.log(error)
   }
 });
 router.get('/inf', function (req, res, next) {
