@@ -35,12 +35,12 @@ $(document).ready(function () {
                     if (data.success == 'true') {
                         var temp = document.getElementsByTagName("template")[0];
                         var clone = temp.content.cloneNode(true);
-                        var nameEl = clone.querySelector(".display-name");
+                        var nameEl = clone.querySelector("#display-name");
                         nameEl.innerHTML = "Tester";
                         var datetime = new Date().toLocaleString().replace(",","").replace("/:.. /"," ");
-                        var datetimeEl = clone.querySelector(".datetime");
+                        var datetimeEl = clone.querySelector("#datetime");
                         datetimeEl.innerHTML = datetime;
-                        var statusEl = clone.querySelector(".fb-user-status");
+                        var statusEl = clone.querySelector("#user-status");
                         statusEl.innerHTML = document.getElementById('content').value;
 
                         document.getElementById('status').prepend(clone);

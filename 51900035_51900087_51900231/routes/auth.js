@@ -18,7 +18,8 @@ passport.use(new GoogleStrategy({
       .then(user => {
         var eMail = new Buffer(profile.emails[0].value);
         const temp1 = new Buffer("@student.tdtu.edu.vn");
-        if (eMail.compare(temp1) > 0) return done(null, user);
+        const temp2 = new Buffer("@tdtu.edu.vn");
+        if (eMail.compare(temp1) > 0 || eMail.compare(temp2) > 0) return done(null, user);
         new User({
           authId: authId,
           name: profile.displayName,
@@ -33,7 +34,7 @@ passport.use(new GoogleStrategy({
         if (err) return done(err, null);
       });
 
-    //If teacher email
+    // If teacher email
     // User.findOne({ 'authId': authId })
     //   .then(user => {
     //     var eMail = new Buffer(profile.emails[0].value);
