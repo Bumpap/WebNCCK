@@ -60,6 +60,10 @@ router.get('/logout', function (req, res) {
   res.redirect('/login');
 });
 
+router.get('/signup',function(req,res){
+  res.render('signup');
+})
+
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated())
     return next();
