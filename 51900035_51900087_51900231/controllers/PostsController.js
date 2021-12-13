@@ -1,4 +1,5 @@
 const Post = require('../models/Post');
+const { post } = require('../routes/posts');
 
 class PostController {
 
@@ -16,6 +17,11 @@ class PostController {
                 res.json({ success: 'true' })
             }
         })
+    }
+
+    async list(req,res){
+        let posts = await Post.find().sort([[]]);
+        res.json(posts);
     }
 }
 
