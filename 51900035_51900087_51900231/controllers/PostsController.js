@@ -6,7 +6,7 @@ class PostController {
     create(req, res) {
         new Post({
             content: req.body.content,
-            creator: req.body.creator,
+            creator: req.user.name,
             created_at: new Date(),
             updated_at: new Date()
         }).save(function (err) {
@@ -19,7 +19,7 @@ class PostController {
         })
     }
 
-    async list(req,res){
+    async list(req, res) {
         let posts = await Post.find().sort([[]]);
         res.json(posts);
     }

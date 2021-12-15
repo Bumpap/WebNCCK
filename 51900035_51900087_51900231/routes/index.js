@@ -60,7 +60,7 @@ function isLoggedIn(req, res, next) {
 
 /* GET home page. */
 router.get('/', isLoggedIn, function (req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('index', { username: req.user.name, email: req.user.email });
 });
 
 module.exports = router;
