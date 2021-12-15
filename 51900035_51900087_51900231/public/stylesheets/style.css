@@ -85,6 +85,10 @@ width: 2em;
   color: red;
 }
 
+.input-group{
+  margin-bottom: 10px;
+}
+
 
 @media (min-width: 768px) {
   .omb_login .omb_forgotPwd {
