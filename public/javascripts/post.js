@@ -1,6 +1,5 @@
 $(document).ready(function () {
     var socket = io();
-    var formidable = require('formidable');
     socket.on('post message', function (data) {
         insertPost(data.username, data.message, data.datetime);
     });
