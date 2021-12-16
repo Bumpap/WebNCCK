@@ -1,0 +1,156 @@
+body {
+  background-color: #eeeeee;
+}
+
+.h7 {
+  font-size: 0.8rem;
+}
+
+.gedf-wrapper {
+  margin-top: 0.97rem;
+}
+
+@media (min-width: 992px) {
+  .gedf-main {
+      padding-left: 4rem;
+      padding-right: 4rem;
+  }
+  .gedf-card {
+      margin-bottom: 2.77rem;
+  }
+}
+
+/**Reset Bootstrap*/
+.dropdown-toggle::after {
+  content: none;
+  display: none;
+}
+
+
+/*
+    Login CSS
+*/
+
+@media (min-width: 768px) {
+  .omb_row-sm-offset-3 div:first-child[class*="col-"] {
+      margin-left: 25%;
+  }
+}
+
+.omb_login .omb_authTitle {
+  text-align: center;
+line-height: 300%;
+}
+
+.omb_login .omb_socialButtons a {
+color: white; 
+opacity:0.9;
+}
+.omb_login .omb_socialButtons a:hover {
+  color: white;
+opacity:1;    	
+}
+
+
+.omb_login .omb_loginOr {
+position: relative;
+font-size: 1.5em;
+color: #aaa;
+margin-top: 1em;
+margin-bottom: 1em;
+padding-top: 0.5em;
+padding-bottom: 0.5em;
+}
+.omb_login .omb_loginOr .omb_hrOr {
+background-color: #cdcdcd;
+height: 1px;
+margin-top: 0px !important;
+margin-bottom: 0px !important;
+}
+.omb_login .omb_loginOr .omb_spanOr {
+display: block;
+position: absolute;
+left: 50%;
+top: -0.6em;
+margin-left: -1.5em;
+background-color: white;
+width: 3em;
+text-align: center;
+}			
+
+.omb_login .omb_loginForm .input-group.i {
+width: 2em;
+}
+.omb_login .omb_loginForm  .help-block {
+  color: red;
+}
+
+.input-group{
+  margin-bottom: 10px;
+}
+
+
+@media (min-width: 768px) {
+  .omb_login .omb_forgotPwd {
+      text-align: right;
+  margin-top:10px;
+ }		
+}
+
+/* profile.hbs */
+.main-breadcrumb {
+  background-color: white;
+}
+.account-settings .user-profile {
+    margin: 0 0 1rem 0;
+    padding-bottom: 1rem;
+    text-align: center;
+}
+.account-settings .user-profile .user-avatar {
+    margin: 0 0 1rem 0;
+}
+.account-settings .user-profile .user-avatar img {
+    width: 90px;
+    height: 90px;
+    -webkit-border-radius: 100px;
+    -moz-border-radius: 100px;
+    border-radius: 100px;
+}
+.account-settings .user-profile h5.user-name {
+    margin: 0 0 0.5rem 0;
+}
+.account-settings .user-profile h6.user-email {
+    margin: 0;
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: #9fa8b9;
+}
+.account-settings .about {
+    margin: 2rem 0 0 0;
+    text-align: center;
+}
+.account-settings .about h5 {
+    margin: 0 0 15px 0;
+    color: #007ae1;
+}
+.account-settings .about p {
+    font-size: 0.825rem;
+}
+.form-control {
+    border: 1px solid #cfd1d8;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    font-size: .825rem;
+    background: #ffffff;
+    color: #2e323c;
+}
+
+.card {
+    background: #ffffff;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    border: 0;
+    margin-bottom: 1rem;
+}
