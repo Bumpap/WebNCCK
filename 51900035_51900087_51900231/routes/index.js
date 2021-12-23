@@ -1,4 +1,5 @@
 var express = require('express');
+
 var router = express.Router();
 var mongodb = require('mongodb');
 const Post = require('../models/Post')
@@ -7,44 +8,31 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
-var logger = require('morgan');
 var db = require('../db');
+var User = require('../models/User');
+var Admin = require('../models/Admin');
 
-var alert = require('alert')
 
-/* GET home page. */
-// router.get('/', function(req, res, next) {
-//   res.render('index', { title: 'Express' });
-// });
+new Admin({
+  authId: "admin1",
+  name: "Admin",
+  email: "admin@gmail.com",
+  password: "admin123",
+  role: "admin",
+  created: new Date(),
+  updated: new Date(),
+  avatar: "./public/images/admin.png",
+}).save()
 
-// async loginGoogle(req, res, next) {
 
-// }
-/* GET login page. */
-router.get('/login', function (req, res, next) {
-  res.render('login');
-});
-router.post('/login', function (req, res, next) {
-  if (req.body.username == "admin@gmail.com" && req.body.password == "123456") {
-    req.session.user = req.body.username;
-    res.render('index', { username: req.session.user, email: req.session.user });
-  } else {
-    let error = undefined
-    if (req.body.username == '') {
-      error = "Please fill your username"
-    }
+router.use(bodyParser.urlencoded({
+  extended: true
+}));
+router.use(bodyParser.json());
 
-    else if (req.body.password == '') {
-      error = "Please fill your password"
-    }
 
-    else
-      error = "Oops, something has been wrong"
-    res.locals.error = error
-    res.render('login', { error });
-    console.log(error)
-  }
-});
+
+
 router.get('/inf', function (req, res, next) {
   Post.find()
     .then(result => {
@@ -70,16 +58,123 @@ function isLoggedIn(req, res, next) {
 }
 // GET PROFILE PAGE
 router.get('/profile-user', isLoggedIn, function (req, res, next) {
-  res.render('profile', { username: req.user.name, email: req.user.email });
+  res.render('profile', { authId: req.user.authId, name: req.user.name, email: req.user.email, avatar: req.user.avatar, lop: req.user.lop, khoa: req.user.khoa });
 });
 
-// router.get('/profile-user', function (req, res, next) {
-//   res.render('profile', { username: req.session.user, email: req.session.user });
-// });
+router.post('/profile-user', isLoggedIn, function (req, res, next) {
+  query = { authId: req.user.authId };
+  var data = { name: req.body.Fullname, lop: req.body.lop, khoa: req.body.khoa, updated: new Date() };
+
+  User.findOneAndUpdate(query, { $set: data }, { new: true }, (err, doc) => {
+    if (err) {
+      console.log("Something wrong when updating data!");
+    }
+    userTDTU = doc;
+    console.log(userTDTU);
+
+  })
+  res.render('profile', { authId: req.user.authId, avatar: req.user.avatar, email: req.user.email, name: req.user.name, lop: req.body.lop, khoa: req.body.khoa });
+});
+
 /* GET home page. */
 router.get('/', isLoggedIn, function (req, res, next) {
-  res.render('index', { username: req.user.name, email: req.user.email });
+  res.render('index', { username: req.user.name, email: req.user.email, avatar: req.user.avatar });
   //console.log(req.user.name);
 });
+
+
+router.get('/createAccount', function (req, res, next) {
+  res.render('createAccount');
+})
+
+
+router.post('/createAccount', function (req, res, next) {
+  new PK({
+    username: req.body.username,
+    email: req.body.email,
+    password: req.body.password,
+    role: "PK",
+    created: new Date(),
+    updated: new Date(),
+    avatar: "./public/images/admin.png",
+  }).save()
+  res.render('createAccount');
+})
+//log in
+// var PK = require('../models/PK');
+// const bcrypt = require('bcrypt');
+// const passport = require('passport');
+// const localStrategy = require('passport-local').Strategy;
+// router.use(passport.initialize());
+// router.use(passport.session());
+
+// passport.serializeUser(function (user, done) {
+//   done(null, user.id);
+// });
+
+// passport.deserializeUser(function (id, done) {
+//   PK.findById(id, function (err, user) {
+//     done(err, user);
+//   });
+// });
+
+
+// passport.use(new localStrategy(function (username, password, done) {
+//   PK.findOne({ username: username }, function (err, user) {
+//     console.log(username);
+//     if (err) return done(err);
+//     if (!user) return done(null, false, { message: 'Incorrect username.' });
+
+//     bcrypt.compare(password, user.password, function (err, res) {
+//       if (err) return done(err);
+//       if (res === false) return done(null, false, { message: 'Incorrect password.' });
+//       console.log(err);
+//       return done(null, user);
+//     });
+//   });
+// }));
+// function isLoggedOut(req, res, next) {
+//   if (!req.isAuthenticated()) return next();
+//   res.redirect('/');
+// }
+
+router.get('/login', (req, res) => {
+  // const response = {
+  //   title: "Login",
+  //   error: req.query.error
+  // }
+
+  res.render('login');
+});
+
+// router.post('/login', passport.authenticate('local', {
+//   successRedirect: '/',
+//   failureRedirect: '/login?error=true'
+// }));
+
+// Setup our admin user
+// router.get('/setup', async (req, res) => {
+//   const exists = await Admin.exists({ username: "admin" });
+
+//   if (exists) {
+//     res.redirect('/login');
+//     return;
+//   };
+
+//   bcrypt.genSalt(10, function (err, salt) {
+//     if (err) return next(err);
+//     bcrypt.hash("pass", salt, function (err, hash) {
+//       if (err) return next(err);
+
+//       const newAdmin = new User({
+//         username: "admin",
+//         password: hash
+//       });
+
+//       newAdmin.save();
+
+//       res.redirect('/login');
+//     });
+//   });
 
 module.exports = router;

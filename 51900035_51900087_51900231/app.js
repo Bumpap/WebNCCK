@@ -9,6 +9,7 @@ var db = require('./db');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var postsRouter = require('./routes/posts');
+//var profileRouter = require('./routes/profile');
 
 var app = express();
 var session = require('express-session');
@@ -21,11 +22,8 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-
 var authRouter = require('./routes/auth');
-
 //..
-
 app.use('/auth', authRouter);
 
 
@@ -42,6 +40,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/posts', postsRouter);
+//app.use('/profile', profileRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

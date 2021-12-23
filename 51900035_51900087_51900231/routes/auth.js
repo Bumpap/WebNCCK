@@ -24,6 +24,9 @@ passport.use(new GoogleStrategy({
           authId: authId,
           name: profile.displayName,
           email: profile.emails[0].value,
+          avatar: profile.photos[0].value,
+          lop: '',
+          khoa: '',
           created: new Date(),
           role: 'student',
         }).save()

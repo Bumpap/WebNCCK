@@ -19,6 +19,8 @@ class PostController {
         })
     }
 
+
+
     async list(req, res) {
         let posts = await Post.find().sort([[]]);
         res.json(posts);

@@ -3,7 +3,7 @@ $(document).ready(function () {
     socket.on('post message', function (data) {
         insertPost(data.username, data.message, data.datetime);
     });
-    function insertPost(username, message, datetime) {
+    function insertPost(username, message, datetime, avatar) {
         var temp = document.getElementsByTagName("template")[0];
         var clone = temp.content.cloneNode(true);
         var nameEl = clone.querySelector("#display-name");
@@ -15,14 +15,6 @@ $(document).ready(function () {
         document.getElementById('status').prepend(clone);
 
     }
-
-    // function getPosts() {
-    //     fetch('/posts/list/page')
-    // }
-
-    // function deletePost(username, message, datetime) {
-
-    // };
     document.getElementById("postBtn").onclick = function (e) {
         e.preventDefault();
         var a = document.getElementById('content').value
@@ -51,11 +43,12 @@ $(document).ready(function () {
                         if (data.success == 'true') {
                             let username = document.getElementById('username').innerHTML;
                             let message = document.getElementById('content').value;
+                            let avatar = document.getElementById('avatar').innerHTML;
                             //var image = document.getElementById('customFile').value;
                             var datetime = new Date().toLocaleString().replace(",", "").replace("/:.. /", " ");
-                            insertPost(username, message, datetime);
+                            insertPost(username, message, datetime, avatar);
                             //emit data after post 
-                            socket.emit('post message', { username: username, message: message, datetime: datetime });
+                            socket.emit('post message', { username: username, message: message, datetime: datetime, avatar: avatar });
                             document.getElementById('content').value = '';
                         } else {
                             console.log("error")
@@ -64,8 +57,7 @@ $(document).ready(function () {
                 })
     }
 
-    document.getElementById("delete").onclick = function (e) {
-        e.preventDefault();
-        document.getElementById('content').value = '';
-    }
+
+
+
 })
