@@ -130,11 +130,15 @@ router.post('/login', (req, res) => {
   }
   else {
     User.findOne({ email: body.email }, function (err, docs) {
-      if (docs.email == null || docs.password == null || docs.email == null && docs.password == null) {
+      // console.log(docs.password)
+      // console.log(body.password)
+      var a = null;
+      if (docs == a) {
+        console.log(err)
         res.redirect('/login')
       } else {
-        if (docs.email == body.email && docs.password == body.password) {
-          res.redirect('/createAccount');
+        if (docs.email === body.email && docs.password === body.password) {
+          res.render('index', { username: docs.name, email: docs.email, avatar: docs.avatar });
         } else {
           console.log('Error')
         }
