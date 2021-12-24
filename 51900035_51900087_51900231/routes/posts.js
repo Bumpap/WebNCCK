@@ -4,6 +4,6 @@ var postsController = require('../controllers/PostsController')
 
 router.post('/create', postsController.create);
 
-router.get('/list', postsController.list);
+router.get('/list/page/:page/limit/:limit', postsController.list);
 
 module.exports = router;

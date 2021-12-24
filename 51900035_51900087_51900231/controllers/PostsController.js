@@ -1,3 +1,4 @@
+const { response } = require('express');
 const Post = require('../models/Post');
 const { post } = require('../routes/posts');
 
@@ -22,7 +23,10 @@ class PostController {
 
 
     async list(req, res) {
-        let posts = await Post.find().sort([[]]);
+        let page = parseInt (req.params.page);
+        let limit = parseInt (req.params.limit);
+        let skip = (page-1)*limit;
+        let posts = await Post.find().sort([['created_at',-1]]).skip(skip).limit(limit);
         res.json(posts);
     }
 }
