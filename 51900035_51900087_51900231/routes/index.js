@@ -10,15 +10,17 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var db = require('../db');
 var User = require('../models/User');
-var Admin = require('../models/Admin');
 
 
-new Admin({
+
+new User({
   authId: "admin1",
   name: "Admin",
   email: "admin@gmail.com",
   password: "admin123",
   role: "admin",
+  lop: "",
+  khoa: "",
   created: new Date(),
   updated: new Date(),
   avatar: "./public/images/admin.png",
@@ -87,94 +89,59 @@ router.get('/createAccount', function (req, res, next) {
   res.render('createAccount');
 })
 
-
+var bcrypt = require("bcryptjs");
 router.post('/createAccount', function (req, res, next) {
-  new PK({
-    username: req.body.username,
-    email: req.body.email,
-    password: req.body.password,
-    role: "PK",
-    created: new Date(),
-    updated: new Date(),
-    avatar: "./public/images/admin.png",
-  }).save()
-  res.render('createAccount');
-})
-//log in
-// var PK = require('../models/PK');
-// const bcrypt = require('bcrypt');
-// const passport = require('passport');
-// const localStrategy = require('passport-local').Strategy;
-// router.use(passport.initialize());
-// router.use(passport.session());
 
-// passport.serializeUser(function (user, done) {
-//   done(null, user.id);
-// });
-
-// passport.deserializeUser(function (id, done) {
-//   PK.findById(id, function (err, user) {
-//     done(err, user);
-//   });
-// });
-
-
-// passport.use(new localStrategy(function (username, password, done) {
-//   PK.findOne({ username: username }, function (err, user) {
-//     console.log(username);
-//     if (err) return done(err);
-//     if (!user) return done(null, false, { message: 'Incorrect username.' });
-
-//     bcrypt.compare(password, user.password, function (err, res) {
-//       if (err) return done(err);
-//       if (res === false) return done(null, false, { message: 'Incorrect password.' });
-//       console.log(err);
-//       return done(null, user);
-//     });
-//   });
-// }));
-// function isLoggedOut(req, res, next) {
-//   if (!req.isAuthenticated()) return next();
-//   res.redirect('/');
-// }
+  if (req.body.email &&
+    req.body.username &&
+    req.body.password &&
+    req.body.passwordConf) {
+    var userData = {
+      authId: "",
+      name: req.body.username,
+      email: req.body.email,
+      password: req.body.password,
+      role: "P_K",
+      lop: "",
+      khoa: "",
+      created: new Date(),
+      updated: new Date(),
+      avatar: "./public/images/admin.png",
+    }
+    User.create(userData, function (err, user) {
+      if (err) {
+        return next(err)
+      } else {
+        return res.redirect('/createAccount');
+      }
+    });
+  }
+});
 
 router.get('/login', (req, res) => {
-  // const response = {
-  //   title: "Login",
-  //   error: req.query.error
-  // }
-
   res.render('login');
 });
 
-// router.post('/login', passport.authenticate('local', {
-//   successRedirect: '/',
-//   failureRedirect: '/login?error=true'
-// }));
+router.post('/login', (req, res) => {
+  var body = req.body;
+  //console.log(body);
+  if (body.email === "admin@gmail.com" && body.password === "123456") {
+    res.render('index', { username: "Admin", avatar: "./public/images/admin.png", email: body.email });
+  }
+  else {
+    User.findOne({ email: body.email }, function (err, docs) {
+      if (docs.email == null || docs.password == null || docs.email == null && docs.password == null) {
+        res.redirect('/login')
+      } else {
+        if (docs.email == body.email && docs.password == body.password) {
+          res.redirect('/createAccount');
+        } else {
+          console.log('Error')
+        }
+      }
+    });
+  }
+})
 
-// Setup our admin user
-// router.get('/setup', async (req, res) => {
-//   const exists = await Admin.exists({ username: "admin" });
-
-//   if (exists) {
-//     res.redirect('/login');
-//     return;
-//   };
-
-//   bcrypt.genSalt(10, function (err, salt) {
-//     if (err) return next(err);
-//     bcrypt.hash("pass", salt, function (err, hash) {
-//       if (err) return next(err);
-
-//       const newAdmin = new User({
-//         username: "admin",
-//         password: hash
-//       });
-
-//       newAdmin.save();
-
-//       res.redirect('/login');
-//     });
-//   });
 
 module.exports = router;
