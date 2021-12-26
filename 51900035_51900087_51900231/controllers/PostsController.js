@@ -20,6 +20,19 @@ class PostController {
         })
     }
 
+//     update(req, res) {
+//         query = { authId: req.user.authId };
+//         var data = { name: req.body.Fullname, lop: req.body.lop, khoa: req.body.khoa, updated: new Date() };
+
+//         User.findOneAndUpdate(query, { $set: data }, { new: true }, (err, doc) => {
+//         if (err) {
+//            console.log("Something wrong when updating data!");
+//         }
+//           console.log(doc);
+
+//   })
+//     }
+
 
 
     async list(req, res) {

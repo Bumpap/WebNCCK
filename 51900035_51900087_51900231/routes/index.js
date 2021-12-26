@@ -10,6 +10,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var db = require('../db');
 var User = require('../models/User');
+var ObjectId = require("mongodb").ObjectId;
 
 
 
@@ -83,6 +84,16 @@ router.get('/', isLoggedIn, function (req, res, next) {
   res.render('index', { username: req.user.name, email: req.user.email, avatar: req.user.avatar });
   //console.log(req.user.name);
 });
+
+router.post('/deletePostBtn', function (req,res,next){
+  Post.deleteOne({_id: ObjectId((req.body.id))}, function(err, result){
+    if (err) console.log(err);
+
+    else{
+      res.send(req.body.id);
+    }
+  })
+})
 
 
 router.get('/createAccount', function (req, res, next) {

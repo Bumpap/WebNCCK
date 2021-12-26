@@ -22,4 +22,21 @@ $(document).ready(function () {
         })
     })
 
+    $("body").on("click","#delete",(event)=>{
+        event.preventDefault();
+        let id = $(event.target).data("id");
+       
+        $.ajax({
+            url: "/deletePostBtn",
+            method: "POST",
+            contentType: "application/json",
+            data: JSON.stringify({id: id}),
+            success: function (res) {
+                let div = document.getElementById(res);
+                 div.remove();
+            }
+
+        })
+    })
+
 })
