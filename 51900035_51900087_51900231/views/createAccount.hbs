@@ -1,28 +1,78 @@
-<div class="container">
-	<div class="omb_login">
-		<h3 class="omb_authTitle">Create Account</h3>
-		<div class="row omb_row-sm-offset-3">
-			<div class="col-xs-12 col-sm-6">
-				<form class="omb_loginForm" autocomplete="off" method="POST" onsubmit="return validateForm();">
-					<div class="input-group">
-						<input type="email" class="form-control" name="email" id="email" placeholder="Email">
+<form method="POST">
+	<div class="container">
+		<nav aria-label="breadcrumb" class="main-breadcrumb">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="/">Home</a></li>
+				<li class="breadcrumb-item active" aria-current="page">Create a new account</li>
+			</ol>
+		</nav>
+		<div class="row gutters">
+			<div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+				<div class="card h-100">
+					<div class="card-body">
+						<div class="account-settings">
+							<div class="user-profile">
+								<div id="avatar" class="user-avatar">
+									<img src="{{avatar}}">
+								</div>
+								<h5 id="name" class="user-name">{{username}}</h5>
+								<h6 id="email" class="user-email">{{email}}</h6>
+								{{!-- <div class="avatar" id="id" style="display: none;">{{id}}</div> --}}
+							</div>
+
+						</div>
 					</div>
-					<div class="input-group">
-						<input type="text" class="form-control" name="username" id="username" placeholder="Username">
+				</div>
+			</div>
+			<div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+				<div class="card h-100">
+					<div class="card-body">
+						<div class="row gutters">
+							<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+								<h6 class="mb-2 text-primary">Account Details</h6>
+							</div>
+							<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+								<div class="form-group">
+									<label for="fullName">Full Name</label>
+									<input type="text" class="form-control" name="username" id="username"
+										placeholder="Username">
+								</div>
+							</div>
+							<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+								<div class="form-group">
+									<label for="eMail">Email</label>
+									<input type="email" class="form-control" name="email" id="email"
+										placeholder="Email">
+								</div>
+							</div>
+							<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+								<div class="form-group">
+									<label for="phone">Password</label>
+									<input type="password" class="form-control" name="password" id="password"
+										placeholder="Password">
+								</div>
+							</div>
+							<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+								<div class="form-group">
+									<label for="school">Confirm Password</label>
+
+									<input type="password" class="form-control" name="passwordConf" id="passwordConf"
+										placeholder="Confirm Password">
+								</div>
+							</div>
+						</div>
+						<div class="row gutters">
+							<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+								<div class="text-right">
+									<a href="/"> <button type="button" id="cancel" name="submit"
+											class="btn btn-secondary">Cancel</button></a>
+									<button id="btn_Submit" type="submit" class="btn btn-primary">Create</button></>
+								</div>
+							</div>
+						</div>
 					</div>
-					<div class="input-group">
-						<input type="password" class="form-control" name="password" id="password"
-							placeholder="Password">
-					</div>
-					<div class="input-group">
-						<input type="password" class="form-control" name="passwordConf" id="passwordConf"
-							placeholder="Confirm Password">
-					</div>
-					<button class="btn btn-lg btn-primary btn-block" type="submit">Create</button>
-				</form>
+				</div>
 			</div>
 		</div>
-
 	</div>
-
-</div>
+</form>

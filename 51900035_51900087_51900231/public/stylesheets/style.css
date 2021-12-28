@@ -1,7 +1,11 @@
 body {
   background-color: #eeeeee;
 }
-
+.avAtar{
+  border-radius: 50%;
+  width:60px;
+  height:60px;
+}
 .h7 {
   font-size: 0.8rem;
 }
