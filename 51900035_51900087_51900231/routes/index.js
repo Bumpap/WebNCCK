@@ -14,6 +14,7 @@ var ObjectId = require("mongodb").ObjectId;
 
 
 
+
 new User({
   authId: "admin1",
   name: "Admin",
@@ -94,6 +95,41 @@ router.post('/deletePostBtn', function (req,res,next){
     }
   })
 })
+
+router.post('/editPostBtn', function (req,res,next){
+  Post.findOne({_id: ObjectId((req.body.id))}, function(err, result){
+    if (err) console.log(err);
+
+    else{
+      res.send(req.body.id);
+    }
+  })
+})
+
+router.post('/saveEdit', function (req,res,next){
+  Post.findOne({_id: ObjectId((req.body.id))}, function(err, result){
+    if (err) console.log(err);
+
+    else{
+      res.send(req.body);
+    }
+  })
+})
+
+router.get('/allpost', isLoggedIn, function (req, res, next) {
+
+  Post.find({creator: req.user.name},function(err,result){
+    if (err) console.log(err);
+
+    else{
+      res.send(result);
+    }
+  })
+  
+
+  // res.render('allpost', { username: req.user.name, email: req.user.email, avatar: req.user.avatar });
+  //console.log(req.user.name);
+});
 
 
 router.get('/createAccount', function (req, res, next) {
