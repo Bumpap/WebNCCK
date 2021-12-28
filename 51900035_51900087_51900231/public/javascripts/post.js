@@ -21,16 +21,12 @@ $(document).ready(function () {
                     var statusEl = clone.querySelector("#user-status");
                     statusEl.innerHTML = data[i].content;
                     var deleteBtn = clone.querySelector("#delete");
-<<<<<<< HEAD
                     deleteBtn.setAttribute('data-id', data[i]._id);
-=======
-                    deleteBtn.setAttribute('data-id' , data[i]._id);
                     var editBtn = clone.querySelector("#edit");
-                    editBtn.setAttribute('data-id',data[i]._id);
+                    editBtn.setAttribute('data-id', data[i]._id);
                     var savePost = document.getElementById("editBtn");
-                    savePost.setAttribute('data-id',data[i]._id);
-                    
->>>>>>> fdf0877d3eac04bef6618dee30badd3cd3179ba8
+                    savePost.setAttribute('data-id', data[i]._id);
+
                     // var datetimeEl = clone.querySelector("#datetime");
                     // datetimeEl.innerHTML = data[i].created_at;
 
@@ -53,16 +49,13 @@ $(document).ready(function () {
         }
     }
 
-<<<<<<< HEAD
-
-=======
     // function getPostUser(){
     //     fetch('/posts/list/page/' +page+ '/limit/' + limit).then(response => {
     //         if (response.status !== 200){
     //             console.log("Looks like there was a problem. Status Code: " + response.status);
     //             return;
     //         }
-    
+
     //         response.json().then(data => {
     //             for (let i =0; i<data.length;i++){
     //                 if (data[i].creator == document.getElementById("username").innerHTML)
@@ -83,7 +76,7 @@ $(document).ready(function () {
     //                 savePost.setAttribute('data-id',data[i]._id);
     //                 // var datetimeEl = clone.querySelector("#datetime");
     //                 // datetimeEl.innerHTML = data[i].created_at;
-    
+
     //                 document.getElementById('status').appendChild(clone)
     //             }
     //         })
@@ -95,8 +88,7 @@ $(document).ready(function () {
     //     getPostUser();
     // }
 
-    
->>>>>>> fdf0877d3eac04bef6618dee30badd3cd3179ba8
+
 
     var socket = io();
     socket.on('post message', function (data) {
