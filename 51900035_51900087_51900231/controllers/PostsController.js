@@ -1,6 +1,7 @@
 const { response } = require('express');
 const Post = require('../models/Post');
 const { post } = require('../routes/posts');
+var ObjectId = require("mongodb").ObjectId;
 
 class PostController {
 
@@ -20,9 +21,15 @@ class PostController {
         })
     }
 
+<<<<<<< HEAD
     //     update(req, res) {
     //         query = { authId: req.user.authId };
     //         var data = { name: req.body.Fullname, lop: req.body.lop, khoa: req.body.khoa, updated: new Date() };
+=======
+//     update(req, res) {
+//         query = { id: data[i]._id };
+//         var data = { name: req.body.Fullname, lop: req.body.lop, khoa: req.body.khoa, updated: new Date() };
+>>>>>>> fdf0877d3eac04bef6618dee30badd3cd3179ba8
 
     //         User.findOneAndUpdate(query, { $set: data }, { new: true }, (err, doc) => {
     //         if (err) {

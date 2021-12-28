@@ -39,4 +39,47 @@ $(document).ready(function () {
         })
     })
 
+    $("body").on("click","#edit",(event)=>{
+        event.preventDefault();
+        let id = $(event.target).data("id");
+       
+        $.ajax({
+            url: "/editPostBtn",
+            method: "POST",
+            contentType: "application/json",
+            data: JSON.stringify({id: id}),
+            success: function (res) {
+                let a = document.getElementById(res);
+                let b = a.querySelector("#" + "user-status").innerHTML;
+                document.getElementById("user-status-edit").innerHTML = b;
+                 console.log(b);
+            }
+
+        })
+    })
+
+    $("body").on("click","#editBtn",(event)=>{
+        event.preventDefault();
+        let id = $(event.target).data("id");
+        let user_edit = document.getElementById("user-status-edit").value;
+       
+        $.ajax({
+            url: "/saveEdit",
+            method: "POST",
+            contentType: "application/json",
+            data: JSON.stringify({id: id,content: user_edit}),
+            success: function (res) {
+
+                // let div = document.getElementById(res.id);
+
+                // div.querySelector(".card-text").innerHTML(res.content);
+            
+                 console.log(res);
+            }
+
+        })
+    })
+
+    
+
 })
