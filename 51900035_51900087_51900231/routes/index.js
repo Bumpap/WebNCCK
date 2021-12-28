@@ -93,10 +93,29 @@ router.use(session({
 router.get('/', isLoggedIn, function (req, res, next) {
   session = req.user;
   //console.log(session.name);
-  res.render('index', { username: session.name, email: session.email, avatar: session.avatar });
+  res.render('index', { username: session.name, email: session.email, avatar: session.avatar, role: session.role });
   //console.log(req.user.name);
 });
+router.get('/changePWD', isLoggedIn, function (req, res, next) {
+  session = req.user;
+  //console.log(session.name);
+  res.render('changePWD', { name: session.name, email: session.email, avatar: session.avatar, role: session.role });
+  //console.log(req.user.name);
+});
+router.post('/changePWD', isLoggedIn, function (req, res, next) {
+  query = { email: req.user.email };
+  var data = { password: req.body.newPWD };
 
+  User.findOneAndUpdate(query, { $set: data }, { new: true }, (err, doc) => {
+    if (err) {
+      console.log("Something wrong when updating data!");
+    }
+    userTDTU = doc;
+    console.log(userTDTU);
+
+  })
+  res.render('changePWD', { name: req.user.name })
+});
 router.post('/deletePostBtn', function (req, res, next) {
   Post.deleteOne({ _id: ObjectId((req.body.id)) }, function (err, result) {
     if (err) console.log(err);
@@ -107,21 +126,21 @@ router.post('/deletePostBtn', function (req, res, next) {
   })
 })
 
-router.post('/editPostBtn', function (req,res,next){
-  Post.findOne({_id: ObjectId((req.body.id))}, function(err, result){
+router.post('/editPostBtn', function (req, res, next) {
+  Post.findOne({ _id: ObjectId((req.body.id)) }, function (err, result) {
     if (err) console.log(err);
 
-    else{
+    else {
       res.send(req.body.id);
     }
   })
 })
 
-router.post('/saveEdit', function (req,res,next){
-  Post.findOne({_id: ObjectId((req.body.id))}, function(err, result){
+router.post('/saveEdit', function (req, res, next) {
+  Post.findOne({ _id: ObjectId((req.body.id)) }, function (err, result) {
     if (err) console.log(err);
 
-    else{
+    else {
       res.send(req.body);
     }
   })
@@ -129,14 +148,14 @@ router.post('/saveEdit', function (req,res,next){
 
 router.get('/allpost', isLoggedIn, function (req, res, next) {
 
-  Post.find({creator: req.user.name},function(err,result){
+  Post.find({ creator: req.user.name }, function (err, result) {
     if (err) console.log(err);
 
-    else{
+    else {
       res.send(result);
     }
   })
-  
+
 
   // res.render('allpost', { username: req.user.name, email: req.user.email, avatar: req.user.avatar });
   //console.log(req.user.name);

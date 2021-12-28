@@ -1,0 +1,78 @@
+<form method="POST">
+    <div class="container">
+        <nav aria-label="breadcrumb" class="main-breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Create a new account</li>
+            </ol>
+        </nav>
+        <div class="row gutters">
+            <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="account-settings">
+                            <div class="user-profile">
+                                <div id="avatar" class="user-avatar">
+                                    <img src="{{avatar}}">
+                                </div>
+                                <h5 id="name" class="user-name">{{username}}</h5>
+                                <h6 id="email" class="user-email">{{email}}</h6>
+                                {{!-- <div class="avatar" id="id" style="display: none;">{{id}}</div> --}}
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="row gutters">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <h6 class="mb-2 text-primary">Account Details</h6>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="fullName">Full Name</label>
+                                    <input type="text" class="form-control" name="username" id="username"
+                                        placeholder="{{name}}" disabled>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="eMail">Old Password</label>
+                                    <input type="email" class="form-control" name="email" id="email"
+                                        placeholder="Email">
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="phone">New Password</label>
+                                    <input type="password" class="form-control" name="newPWD" id="newPWD"
+                                        placeholder="New Password">
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="school">Confirm Password</label>
+
+                                    <input type="password" class="form-control" name="passwordConf" id="passwordConf"
+                                        placeholder="Confirm Password">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row gutters">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <div class="text-right">
+                                    <a href="/"> <button type="button" id="cancel" name="submit"
+                                            class="btn btn-secondary">Cancel</button></a>
+                                    <button id="#btn_changePWD" type="submit" class="btn btn-primary">Create</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

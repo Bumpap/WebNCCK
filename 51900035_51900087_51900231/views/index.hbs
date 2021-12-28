@@ -34,15 +34,19 @@
                 </div>
                 <ul class="list-group list-group-flush">
 
-
-
+                    {{#if role}}
                     <li class="list-group-item">
                         <a href="/createAccount">
                             <div class="h6 text-muted">Create Account</div>
                         </a>
-
                     </li>
 
+                    {{/if}}
+                    <li class="list-group-item">
+                        <a href="/changePWD">
+                            <div class="h6 text-muted">Change Password</div>
+                        </a>
+                    </li>
                     <li class="list-group-item">
                         <a href="/allpost" id="allpost">
                             <div class="h6 text-muted">Posts</div>
