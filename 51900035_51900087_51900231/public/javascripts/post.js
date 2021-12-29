@@ -23,13 +23,12 @@ $(document).ready(function () {
                     var deleteBtn = clone.querySelector("#delete");
                     deleteBtn.setAttribute('data-id', data[i]._id);
                     var editBtn = clone.querySelector("#edit");
-                    editBtn.setAttribute('data-id', data[i]._id);
-                    var savePost = document.getElementById("editBtn");
-                    savePost.setAttribute('data-id', data[i]._id);
-
-                    // var datetimeEl = clone.querySelector("#datetime");
-                    // datetimeEl.innerHTML = data[i].created_at;
-
+                    editBtn.setAttribute('data-id',data[i]._id);
+                    
+                    
+                    var datetimeEl = clone.querySelector("#datetime");
+                    datetimeEl.innerHTML = data[i].created_at;
+    
                     document.getElementById('status').appendChild(clone)
                 }
             })
