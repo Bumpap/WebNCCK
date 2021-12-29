@@ -32,7 +32,7 @@
                     {{#if faculty}}
                     <a id="username" class="h5">{{name}}</a>
                     {{/if}}
-                    
+
                     <div class="h7 text-muted">{{email}}</div>
                     {{!-- {{#if role.equals("admin")}}
                     <TEXTAREA class=""></TEXTAREA>
@@ -44,7 +44,7 @@
                 <ul class="list-group list-group-flush">
 
                     {{#if admin}}
-                        <li class="list-group-item">
+                    <li class="list-group-item">
                         <a href="/createAccount">
                             <div class="h6 text-muted">Create Account</div>
                         </a>
@@ -198,27 +198,37 @@
 
 
         <div class="col-md-3">
-                <div class="card gedf-card">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                            card's content.</p>
-                        <a href="#" class="card-link">Card link</a>
-                        <a href="#" class="card-link">Another link</a>
+            {{#if faculty}}
+            {{!-- Role Phòng ban --}}
+            <div class="card gedf-card">
+                <div class="card-body">
+                    <div class="form-group">
+                        <h6>Post Notification</h6>
+                        <label class="sr-only" for="content">post</label>
+                        <textarea class="form-control" name="contentNotif" id="contentNotif" rows="3"
+                            placeholder="What's your notification?"></textarea>
+                    </div>
+                    <div class="btn-group">
+                        <button id="postNotiBtn" type="submit" class="btn btn-primary">Post</button>
                     </div>
                 </div>
-                <div class="card gedf-card">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                                card's content.</p>
-                            <a href="#" class="card-link">Card link</a>
-                            <a href="#" class="card-link">Another link</a>
-                        </div>
-                    </div>
             </div>
+            <template>
+                <div class="card-body">
+
+                </div>
+            </template>
+            {{/if}}
+            {{#if student}}
+            <div class="card gedf-card">
+                <template>
+                    <h1 class="card-noti"></h1>
+                    <h3 class="card-datetime"></h3>
+                </template>
+            </div>
+            {{/if}}
+
+        </div>
 
     </div>
 </div>

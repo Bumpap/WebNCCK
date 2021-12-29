@@ -15,7 +15,8 @@ var user;
 var temp = false;
 let temp1;
 var bcrypt = require("bcryptjs");
-
+let error;
+var formatPWD = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,15}$/;
 
 User.findOne({ email: "admin@gmail.com" })
   .then(user => {
@@ -95,42 +96,54 @@ router.use(session({
 }));
 
 router.get('/changePWD', isLoggedIn, function (req, res, next) {
-
-  if (req.user) {
-    user = req.user
-  } else {
-    user = temp1
-    //console.log(temp1)
-  }
+  user = temp1
+  //console.log(temp1)
   res.render('changePWD', { name: user.name, email: user.email, avatar: user.avatar, role: user.role });
 
 });
 router.post('/changePWD', isLoggedIn, function (req, res, next) {
-  if (req.user) {
-    user = req.user
-  } else {
-    user = temp1
-    console.log(temp1)
-  }
-  query = { email: user.email };
+  var error;
+  user = temp1
   //console.log(email)
+  //console.log(formatPWD.equals("12345678aA"))
+  var oldPWD = req.body.oldPWD;
   var newPWD = req.body.newPWD;
   var confPWD = req.body.passwordConf;
-  if (newPWD != confPWD) {
-    console.log("Error");
-  } else {
-    var data = { password: newPWD };
+  if (user.password !== oldPWD) {
+    error = "Old password is not matching";
+    res.render('changePWD', { error, name: user.name, email: user.email, avatar: user.avatar, role: user.role })
+  }
+  else if (newPWD != confPWD) {
+    error = "Not machting password"
+    res.render('changePWD', { error: error, name: user.name, email: user.email, avatar: user.avatar, role: user.role })
 
+  }
+  else if (newPWD.length < 8 || confPWD.lengths < 8) {
+    error = "Password must be 8 characters long"
+    res.render('changePWD', { error: error, name: user.name, email: user.email, avatar: user.avatar, role: user.role })
+
+  }
+  // else if (newPWD !== formatPWD || confPWD !== formatPWD) {
+  //   error = "Password must be containt a character"
+  //   res.render('changePWD', { error: error, name: user.name, email: user.email, avatar: user.avatar, role: user.role })
+
+  // }
+  else {
+    var data = { password: newPWD };
+    query = { email: user.email };
     User.findOneAndUpdate(query, { $set: data }, { new: true }, (err, doc) => {
       if (err) {
-        console.log("Something wrong when updating data!");
+        error = "Error when updating password.Please try again later"
+        res.render('changePWD', { error, name: user.name, email: user.email, avatar: user.avatar, role: user.role })
+      } else {
+        userTDTU = doc;
+        const success = "Register success"
+        res.render('changePWD', { success, name: user.name, email: user.email, avatar: user.avatar, role: user.role })
       }
-      userTDTU = doc;
-      //console.log(userTDTU);
 
     })
   }
-  res.render('changePWD', { name: user.name, email: user.email, avatar: user.avatar, role: user.role })
+
 });
 router.post('/deletePostBtn', isLoggedIn, function (req, res, next) {
   Post.deleteOne({ _id: ObjectId((req.body.id)) }, function (err, result) {
@@ -193,32 +206,44 @@ router.get('/createAccount', isLoggedIn, function (req, res, next) {
 
 
 router.post('/createAccount', isLoggedIn, function (req, res, next) {
-
+  user = temp1
   if (req.body.email &&
     req.body.username &&
     req.body.password &&
     req.body.passwordConf) {
-    var userData = {
-      authId: "",
-      name: req.body.username,
-      email: req.body.email,
-      password: req.body.password,
-      role: "faculty",
-      lop: "Phong/khoa",
-      khoa: "Phong/Khoa",
-      created: new Date(),
-      updated: new Date(),
-      avatar: "https://inkythuatso.com/uploads/images/2021/11/logo-tdtu-inkythuatso-01-25-14-39-31.jpg"
-    }
-    User.create(userData, function (err, user) {
-      if (err) {
-        return next(err)
-      } else {
-        return res.redirect('/createAccount');
-      }
-    });
+
+    User.findOne({ email: req.body.email })
+      .then(user => {
+        if (user) {
+          error = "Invalid Username or Password"
+          return res.render('createAccount', { error: error, username: "AdminTDT", email: "admin@tdtu.edu.vn", avatar: user.avatar })
+        }
+        else {
+          var userData = {
+            authId: "",
+            name: req.body.username,
+            email: req.body.email,
+            password: req.body.password,
+            role: "faculty",
+            lop: "Phong/khoa",
+            khoa: "Phong/Khoa",
+            created: new Date(),
+            updated: new Date(),
+            avatar: "https://inkythuatso.com/uploads/images/2021/11/logo-tdtu-inkythuatso-01-25-14-39-31.jpg"
+          }
+          User.create(userData, function (err, user) {
+            if (err) {
+              return next(err)
+            } else {
+              const success = "Register success"
+              res.render('createAccount', { success: success, username: "AdminTDT", email: "admin@tdtu.edu.vn", avatar: user.avatar });
+            }
+          });
+        }
+      });
   }
 });
+
 
 
 router.get('/', isLoggedIn, function (req, res, next) {
@@ -229,19 +254,19 @@ router.get('/', isLoggedIn, function (req, res, next) {
     //console.log(temp1)
   }
 
-  if (user.role == "admin"){
+  if (user.role == "admin") {
     res.render('index', { name: user.name, email: user.email, avatar: user.avatar, admin: user.role });
   }
 
-  else if (user.role == "faculty"){
-    res.render('index', { name: user.name, email: user.email, avatar: user.avatar,faculty: user.role});
+  else if (user.role == "faculty") {
+    res.render('index', { name: user.name, email: user.email, avatar: user.avatar, faculty: user.role });
   }
 
   else {
-    res.render('index', { name: user.name, email: user.email, avatar: user.avatar,student: user.role});
+    res.render('index', { name: user.name, email: user.email, avatar: user.avatar, student: user.role });
 
   }
- 
+
 
 });
 router.get('/login', function (req, res, next) {
@@ -251,26 +276,27 @@ router.get('/login', function (req, res, next) {
 
 router.post('/login', function (req, res, next) {
   var body = req.body;
-  User.findOne({ email: body.email }, function (err, docs) {
-    var a = null;
-    if (docs == a) {
-      console.log(err)
-      const error = "Invalid Username or Password"
-      console.log(error)
-      return res.render('login', { error: error })
-    } else {
-      if (docs.email === body.email && docs.password === body.password) {
-        const obj = JSON.parse(JSON.stringify(docs));
-        //console.log(temp1)
-        temp1 = obj
-        temp = true;
-        return res.redirect('/');
-        // console.log(temp)
-      } else {
-        console.log('Error')
+  User.findOne({ email: req.body.email })
+    .then(user => {
+      if (user) {
+        if (user.email === body.email && user.password === body.password) {
+          const obj = JSON.parse(JSON.stringify(user));
+          //console.log(temp1)
+          temp1 = obj
+          temp = true;
+          return res.redirect('/');
+        } else {
+          const error = "Invalid Username or Password"
+          console.log(error)
+          return res.render('login', { error: error })
+        }
       }
-    }
-  })
+      else {
+        const error = "Invalid Username or Password"
+        console.log(error)
+        return res.render('login', { error: error })
+      }
+    });
 })
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated() || temp) {

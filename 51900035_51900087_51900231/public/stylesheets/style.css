@@ -221,6 +221,14 @@ body {
 	color: red;
 	box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
 }
+.succ-msg{
+	padding: 10px 15px;
+	background-color: #fff;
+	border-radius: 8px;
+	margin-bottom: 15px;
+	color: green;
+	box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+}
 
 .form_Login .form-group {
 	margin-bottom: 30px;
