@@ -187,7 +187,8 @@
                         </div>
                         <div class="card-footer">
                             <a href="#" class="card-link"><i class="fa fa-gittip"></i> Like</a>
-                            <a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>
+                            <a class="card-link" id="comment" data-toggle="modal"
+                                data-target="#commentModal"><i class="fa fa-comment" ></i> Comment</a>
                             <a href="#" class="card-link"><i class="fa fa-mail-forward"></i> Share</a>
                         </div>
                     </div>
@@ -198,10 +199,7 @@
     </div>
 </div>
 
-<!-- Modal -->
-
-
-
+<!-- editModal -->
 <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -218,6 +216,44 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary" id="editBtn">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{!-- commentModal --}}
+<div class="modal fade" id="commentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">Comment</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="cmt">
+                <template>   
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="mr-2">
+                            <img class="rounded-circle" width="35" src="{{avatar}}" alt="">
+                        </div>
+                        <div class="ml-2">
+                            <div class="h6 m-0" id="comment-name">@LeeCross</div>
+                        </div>
+                        <div class="text-muted h7 mb-2" id="date-time"> <i class="fa fa-clock-o"></i>10 min ago</div>
+                        <p id="user-comments" class="card-text">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo recusandae nulla rem eos
+                            ipsa
+                        </p>
+                    </div>
+                </template> 
+            </div>
+            <div class="modal-footer">
+                <img class="rounded-circle" width="35" src="{{avatar}}" alt="">
+                <textarea class="form-control" name="comment-content" id="user-status-comment" rows="3"></textarea>
+                <button id="commentBtn" type="submit" class="btn btn-primary">Post</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
