@@ -20,6 +20,7 @@ app.use(session({
   saveUninitialized: true,
   secret: 'SECRET'
 }));
+// 
 app.use(passport.initialize());
 app.use(passport.session());
 var authRouter = require('./routes/auth');

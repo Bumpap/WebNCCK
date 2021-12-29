@@ -22,24 +22,40 @@ $(document).ready(function () {
         })
     })
 
-    $("body").on("click","#delete",(event)=>{
+    $("#btn_changePWD").on("submit", function (event) {
         event.preventDefault();
-        let id = $(event.target).data("id");
-       
+        let newPWD = $("newPWD").val();
+
         $.ajax({
-            url: "/deletePostBtn",
+            url: "/changePWD",
             method: "POST",
             contentType: "application/json",
-            data: JSON.stringify({id: id}),
+            data: JSON.stringify({ password: newPWD }),
             success: function (res) {
-                let div = document.getElementById(res);
-                 div.remove();
+                $("newPWD").val() = newPWD;
             }
 
         })
     })
 
-    $("body").on("click","#edit",(event)=>{
+    $("body").on("click", "#delete", (event) => {
+        event.preventDefault();
+        let id = $(event.target).data("id");
+
+        $.ajax({
+            url: "/deletePostBtn",
+            method: "POST",
+            contentType: "application/json",
+            data: JSON.stringify({ id: id }),
+            success: function (res) {
+                let div = document.getElementById(res);
+                div.remove();
+            }
+
+        })
+    })
+
+    $("body").on("click", "#edit", (event) => {
         event.preventDefault();
         let id = $(event.target).data("id");
         let savePost = document.getElementById("editBtn");
@@ -49,7 +65,7 @@ $(document).ready(function () {
             url: "/editPostBtn",
             method: "POST",
             contentType: "application/json",
-            data: JSON.stringify({id: id}),
+            data: JSON.stringify({ id: id }),
             success: function (res) {
                 let a = document.getElementById(res);
                 let b = a.querySelector("#" + "user-status").innerHTML;
@@ -61,28 +77,28 @@ $(document).ready(function () {
         })
     })
 
-    $("body").on("click","#editBtn",(event)=>{
+    $("body").on("click", "#editBtn", (event) => {
         event.preventDefault();
         let id = $(event.target).data("id");
         let user_edit = document.getElementById("user-status-edit").value;
-       
+
         $.ajax({
             url: "/saveEdit",
             method: "POST",
             contentType: "application/json",
-            data: JSON.stringify({id: id,content: user_edit}),
+            data: JSON.stringify({ id: id, content: user_edit }),
             success: function (res) {
 
                 // let div = document.getElementById(res.id);
 
                 // div.querySelector(".card-text").innerHTML(res.content);
-            
-                 console.log(res);
+
+                console.log(res);
             }
 
         })
     })
 
-    
+
 
 })
