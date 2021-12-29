@@ -11,23 +11,22 @@ var cookieParser = require('cookie-parser');
 var db = require('../db');
 var User = require('../models/User');
 var ObjectId = require("mongodb").ObjectId;
-
-
-
-
+var user;
+var temp = false;
+let temp1;
+var bcrypt = require("bcryptjs");
 new User({
   authId: "admin1",
-  name: "Admin",
+  name: "AdminTDT",
   email: "admin@gmail.com",
   password: "admin123",
   role: "admin",
-  lop: "",
-  khoa: "",
+  lop: "admin",
+  khoa: "admin",
   created: new Date(),
   updated: new Date(),
   avatar: "https://inkythuatso.com/uploads/images/2021/11/logo-tdtu-inkythuatso-01-25-14-39-31.jpg"
 }).save()
-
 
 router.use(bodyParser.urlencoded({
   extended: true
@@ -47,25 +46,23 @@ router.get('/inf', function (req, res, next) {
 });
 
 router.get('/logout', function (req, res) {
+
   req.logout();
   res.redirect('/login');
+  temp = false;
 });
 
-router.get('/signup', function (req, res) {
-  res.render('signup');
-})
 
-function isLoggedIn(req, res, next) {
-  if (req.isAuthenticated())
-    return next();
-  res.redirect('/login');
-}
 // GET PROFILE PAGE
 router.get('/profile-user', function (req, res, next) {
-  session = req.user;
-  console.log(session)
+  if (req.user) {
+    user = req.user
+  } else {
+    user = temp1
+    console.log(temp1)
+  }
   //console.log(session.name);
-  res.render('profile', { name: session.name, email: session.email, avatar: session.avatar, lop: session.lop, khoa: session.khoa });
+  res.render('profile', { name: user.name, email: user.email, avatar: user.avatar, lop: user.lop, khoa: user.khoa });
   //res.render('profile', { authId: req.user.authId, name: req.user.name, email: req.user.email, avatar: req.user.avatar, lop: req.user.lop, khoa: req.user.khoa });
 });
 
@@ -89,31 +86,36 @@ router.use(session({
   resave: true,
   saveUninitialized: false
 }));
-/* GET home page. */
-router.get('/', isLoggedIn, function (req, res, next) {
-  session = req.user;
-  //console.log(session.name);
-  res.render('index', { username: session.name, email: session.email, avatar: session.avatar, role: session.role });
-  //console.log(req.user.name);
-});
+
 router.get('/changePWD', isLoggedIn, function (req, res, next) {
-  session = req.user;
-  //console.log(session.name);
-  res.render('changePWD', { name: session.name, email: session.email, avatar: session.avatar, role: session.role });
-  //console.log(req.user.name);
+
+  if (req.user) {
+    user = req.user
+  } else {
+    user = temp1
+    console.log(temp1)
+  }
+  res.render('changePWD', { name: user.name, email: user.email, avatar: user.avatar, role: user.role });
+
 });
 router.post('/changePWD', isLoggedIn, function (req, res, next) {
   query = { email: req.user.email };
-  var data = { password: req.body.newPWD };
+  var newPWD = req.body.newPWD;
+  var confPWD = req.body.passwordConf;
+  if (newPWD != confPWD) {
+    console.log("Error");
+  } else {
+    var data = { password: newPWD };
 
-  User.findOneAndUpdate(query, { $set: data }, { new: true }, (err, doc) => {
-    if (err) {
-      console.log("Something wrong when updating data!");
-    }
-    userTDTU = doc;
-    console.log(userTDTU);
+    User.findOneAndUpdate(query, { $set: data }, { new: true }, (err, doc) => {
+      if (err) {
+        console.log("Something wrong when updating data!");
+      }
+      userTDTU = doc;
+      console.log(userTDTU);
 
-  })
+    })
+  }
   res.render('changePWD', { name: req.user.name })
 });
 router.post('/deletePostBtn', function (req, res, next) {
@@ -147,29 +149,35 @@ router.post('/saveEdit', function (req, res, next) {
 })
 
 router.get('/allpost', isLoggedIn, function (req, res, next) {
-
-  Post.find({ creator: req.user.name }, function (err, result) {
+  if (req.user) {
+    user = req.user
+  } else {
+    user = temp1
+    console.log(temp1)
+  }
+  Post.find({ creator: user.name }, function (err, result) {
     if (err) console.log(err);
 
     else {
       res.send(result);
     }
   })
-
-
-  // res.render('allpost', { username: req.user.name, email: req.user.email, avatar: req.user.avatar });
-  //console.log(req.user.name);
 });
 
 
 router.get('/createAccount', isLoggedIn, function (req, res, next) {
-  session = req.user
+  if (req.user) {
+    user = req.user
+  } else {
+    user = temp1
+    console.log(temp1)
+  }
   console.log(session.name)
-  //console.log(session)
-  res.render('createAccount', { username: session.name, email: session.email, avatar: session.avatar, lop: session.lop, khoa: session.khoa });
+
+  res.render('createAccount', { username: user.name, email: user.email, avatar: user.avatar, lop: user.lop, khoa: user.khoa });
 })
 
-var bcrypt = require("bcryptjs");
+
 router.post('/createAccount', function (req, res, next) {
 
   if (req.body.email &&
@@ -181,9 +189,9 @@ router.post('/createAccount', function (req, res, next) {
       name: req.body.username,
       email: req.body.email,
       password: req.body.password,
-      role: "P_K",
-      lop: "",
-      khoa: "",
+      role: "Faculty",
+      lop: "Phong/khoa",
+      khoa: "Phong/Khoa",
       created: new Date(),
       updated: new Date(),
       avatar: "https://inkythuatso.com/uploads/images/2021/11/logo-tdtu-inkythuatso-01-25-14-39-31.jpg"
@@ -198,12 +206,24 @@ router.post('/createAccount', function (req, res, next) {
   }
 });
 
+
+router.get('/', isLoggedIn, function (req, res, next) {
+  if (req.user) {
+    user = req.user
+  } else {
+    user = temp1
+    console.log(temp1)
+  }
+  res.render('index', { name: user.name, email: user.email, avatar: user.avatar, role: user.role });
+
+});
 router.get('/login', function (req, res, next) {
   res.render('login');
 });
+
+
 router.post('/login', function (req, res, next) {
   var body = req.body;
-
   User.findOne({ email: body.email }, function (err, docs) {
     var a = null;
     if (docs == a) {
@@ -211,14 +231,23 @@ router.post('/login', function (req, res, next) {
       res.redirect('login')
     } else {
       if (docs.email === body.email && docs.password === body.password) {
-        session = docs
-        //console.log(session)
-        res.render('index', { username: session.name, email: session.email, avatar: session.avatar });
+        const obj = JSON.parse(JSON.stringify(docs));
+        //console.log(temp1)
+        temp1 = obj
+        temp = true;
+        return res.redirect('/');
+        // console.log(temp)
       } else {
         console.log('Error')
       }
     }
   })
 })
-
+function isLoggedIn(req, res, next) {
+  if (req.isAuthenticated() || temp) {
+    console.log(temp)
+    return next();
+  }
+  res.redirect('/login');
+}
 module.exports = router;

@@ -4,7 +4,6 @@ const { post } = require('../routes/posts');
 var ObjectId = require("mongodb").ObjectId;
 
 class PostController {
-
     create(req, res) {
         new Post({
             content: req.body.content,
@@ -20,22 +19,6 @@ class PostController {
             }
         })
     }
-
-    //     update(req, res) {
-    //         query = { id: data[i]._id };
-    //         var data = { name: req.body.Fullname, lop: req.body.lop, khoa: req.body.khoa, updated: new Date() };
-
-    //         User.findOneAndUpdate(query, { $set: data }, { new: true }, (err, doc) => {
-    //         if (err) {
-    //            console.log("Something wrong when updating data!");
-    //         }
-    //           console.log(doc);
-
-    //   })
-    //     }
-
-
-
     async list(req, res) {
         let page = parseInt(req.params.page);
         let limit = parseInt(req.params.limit);
