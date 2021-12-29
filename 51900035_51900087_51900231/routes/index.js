@@ -15,18 +15,27 @@ var user;
 var temp = false;
 let temp1;
 var bcrypt = require("bcryptjs");
-new User({
-  authId: "01",
-  name: "AdminTDT",
-  email: "admin@gmail.com",
-  password: "admin123",
-  role: "admin",
-  lop: "admin",
-  khoa: "admin",
-  created: new Date(),
-  updated: new Date(),
-  avatar: "https://inkythuatso.com/uploads/images/2021/11/logo-tdtu-inkythuatso-01-25-14-39-31.jpg"
-}).save()
+
+
+User.findOne({ email: "admin@gmail.com" })
+  .then(user => {
+    if (user) return;
+    else {
+      new User({
+        authId: "01",
+        name: "AdminTDT",
+        email: "admin@gmail.com",
+        password: "admin123",
+        role: "admin",
+        lop: "admin",
+        khoa: "admin",
+        created: new Date(),
+        updated: new Date(),
+        avatar: "https://inkythuatso.com/uploads/images/2021/11/logo-tdtu-inkythuatso-01-25-14-39-31.jpg"
+      }).save()
+    }
+  });
+
 
 router.use(bodyParser.urlencoded({
   extended: true
@@ -61,15 +70,7 @@ router.get('/logout', function (req, res) {
 
 // GET PROFILE PAGE
 router.get('/profile-user', isLoggedIn, function (req, res, next) {
-  if (req.user) {
-    user = req.user
-  } else {
-    user = temp1
-    //console.log(temp1)
-  }
-  //console.log(session.name);
-  res.render('profile', { name: user.name, email: user.email, avatar: user.avatar, lop: user.lop, khoa: user.khoa });
-  //res.render('profile', { authId: req.user.authId, name: req.user.name, email: req.user.email, avatar: req.user.avatar, lop: req.user.lop, khoa: req.user.khoa });
+  res.render('profile', { authId: req.user.authId, name: req.user.name, email: req.user.email, avatar: req.user.avatar, lop: req.user.lop, khoa: req.user.khoa });
 });
 
 router.post('/profile-user', isLoggedIn, function (req, res, next) {
@@ -84,7 +85,7 @@ router.post('/profile-user', isLoggedIn, function (req, res, next) {
     console.log(userTDTU);
 
   })
-  res.render('profile', { username: session.name, email: session.email, avatar: session.avatar, lop: session.lop, khoa: session.khoa });
+  res.render('profile', { authId: req.user.authId, avatar: req.user.avatar, email: req.user.email, name: req.user.name, lop: req.body.lop, khoa: req.body.khoa });
 });
 var session = require('express-session');
 router.use(session({
@@ -241,7 +242,9 @@ router.post('/login', function (req, res, next) {
     var a = null;
     if (docs == a) {
       console.log(err)
-      res.redirect('login')
+      const error = "Invalid Username or Password"
+      console.log(error)
+      return res.render('login', { error: error })
     } else {
       if (docs.email === body.email && docs.password === body.password) {
         const obj = JSON.parse(JSON.stringify(docs));

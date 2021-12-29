@@ -16,6 +16,7 @@ passport.use(new GoogleStrategy({
     //If student email
     User.findOne({ 'authId': authId })
       .then(user => {
+        if (user) return done(null, user);
         var eMail = new Buffer(profile.emails[0].value);
         const temp1 = new Buffer("@student.tdtu.edu.vn");
         const temp2 = new Buffer("@tdtu.edu.vn");
@@ -34,6 +35,7 @@ passport.use(new GoogleStrategy({
           .catch(err => done(err, null));
       })
       .catch(err => {
+        console.log(err);
         if (err) return done(err, null);
       });
   }
