@@ -42,6 +42,8 @@ $(document).ready(function () {
     $("body").on("click","#edit",(event)=>{
         event.preventDefault();
         let id = $(event.target).data("id");
+        let savePost = document.getElementById("editBtn");
+        savePost.setAttribute('data-id',id);
        
         $.ajax({
             url: "/editPostBtn",
@@ -53,6 +55,7 @@ $(document).ready(function () {
                 let b = a.querySelector("#" + "user-status").innerHTML;
                 document.getElementById("user-status-edit").innerHTML = b;
                  console.log(b);
+                 console.log(id);
             }
 
         })
