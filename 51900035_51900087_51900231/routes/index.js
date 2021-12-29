@@ -203,7 +203,7 @@ router.post('/createAccount', isLoggedIn, function (req, res, next) {
       name: req.body.username,
       email: req.body.email,
       password: req.body.password,
-      role: "Faculty",
+      role: "faculty",
       lop: "Phong/khoa",
       khoa: "Phong/Khoa",
       created: new Date(),
@@ -228,7 +228,20 @@ router.get('/', isLoggedIn, function (req, res, next) {
     user = temp1
     //console.log(temp1)
   }
-  res.render('index', { name: user.name, email: user.email, avatar: user.avatar, role: user.role });
+
+  if (user.role == "admin"){
+    res.render('index', { name: user.name, email: user.email, avatar: user.avatar, admin: user.role });
+  }
+
+  else if (user.role == "faculty"){
+    res.render('index', { name: user.name, email: user.email, avatar: user.avatar,faculty: user.role});
+  }
+
+  else {
+    res.render('index', { name: user.name, email: user.email, avatar: user.avatar,student: user.role});
+
+  }
+ 
 
 });
 router.get('/login', function (req, res, next) {
