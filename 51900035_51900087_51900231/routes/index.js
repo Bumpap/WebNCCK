@@ -16,7 +16,7 @@ var temp = false;
 let temp1;
 var bcrypt = require("bcryptjs");
 new User({
-  authId: "admin1",
+  authId: "01",
   name: "AdminTDT",
   email: "admin@gmail.com",
   password: "admin123",
@@ -36,7 +36,13 @@ router.use(bodyParser.json());
 
 
 
-router.get('/inf', function (req, res, next) {
+router.get('/inf', isLoggedIn, function (req, res, next) {
+  if (req.user) {
+    user = req.user
+  } else {
+    user = temp1
+    //console.log(temp1)
+  }
   Post.find()
     .then(result => {
       res.status(200).json({
@@ -54,12 +60,12 @@ router.get('/logout', function (req, res) {
 
 
 // GET PROFILE PAGE
-router.get('/profile-user', function (req, res, next) {
+router.get('/profile-user', isLoggedIn, function (req, res, next) {
   if (req.user) {
     user = req.user
   } else {
     user = temp1
-    console.log(temp1)
+    //console.log(temp1)
   }
   //console.log(session.name);
   res.render('profile', { name: user.name, email: user.email, avatar: user.avatar, lop: user.lop, khoa: user.khoa });
@@ -93,13 +99,20 @@ router.get('/changePWD', isLoggedIn, function (req, res, next) {
     user = req.user
   } else {
     user = temp1
-    console.log(temp1)
+    //console.log(temp1)
   }
   res.render('changePWD', { name: user.name, email: user.email, avatar: user.avatar, role: user.role });
 
 });
 router.post('/changePWD', isLoggedIn, function (req, res, next) {
-  query = { email: req.user.email };
+  if (req.user) {
+    user = req.user
+  } else {
+    user = temp1
+    console.log(temp1)
+  }
+  query = { email: user.email };
+  //console.log(email)
   var newPWD = req.body.newPWD;
   var confPWD = req.body.passwordConf;
   if (newPWD != confPWD) {
@@ -112,13 +125,13 @@ router.post('/changePWD', isLoggedIn, function (req, res, next) {
         console.log("Something wrong when updating data!");
       }
       userTDTU = doc;
-      console.log(userTDTU);
+      //console.log(userTDTU);
 
     })
   }
-  res.render('changePWD', { name: req.user.name })
+  res.render('changePWD', { name: user.name, email: user.email, avatar: user.avatar, role: user.role })
 });
-router.post('/deletePostBtn', function (req, res, next) {
+router.post('/deletePostBtn', isLoggedIn, function (req, res, next) {
   Post.deleteOne({ _id: ObjectId((req.body.id)) }, function (err, result) {
     if (err) console.log(err);
 
@@ -128,7 +141,7 @@ router.post('/deletePostBtn', function (req, res, next) {
   })
 })
 
-router.post('/editPostBtn', function (req, res, next) {
+router.post('/editPostBtn', isLoggedIn, function (req, res, next) {
   Post.findOne({ _id: ObjectId((req.body.id)) }, function (err, result) {
     if (err) console.log(err);
 
@@ -138,7 +151,7 @@ router.post('/editPostBtn', function (req, res, next) {
   })
 })
 
-router.post('/saveEdit', function (req, res, next) {
+router.post('/saveEdit', isLoggedIn, function (req, res, next) {
   Post.findOne({ _id: ObjectId((req.body.id)) }, function (err, result) {
     if (err) console.log(err);
 
@@ -153,7 +166,7 @@ router.get('/allpost', isLoggedIn, function (req, res, next) {
     user = req.user
   } else {
     user = temp1
-    console.log(temp1)
+    //console.log(temp1)
   }
   Post.find({ creator: user.name }, function (err, result) {
     if (err) console.log(err);
@@ -170,7 +183,7 @@ router.get('/createAccount', isLoggedIn, function (req, res, next) {
     user = req.user
   } else {
     user = temp1
-    console.log(temp1)
+    //console.log(temp1)
   }
   console.log(session.name)
 
@@ -178,7 +191,7 @@ router.get('/createAccount', isLoggedIn, function (req, res, next) {
 })
 
 
-router.post('/createAccount', function (req, res, next) {
+router.post('/createAccount', isLoggedIn, function (req, res, next) {
 
   if (req.body.email &&
     req.body.username &&
@@ -212,7 +225,7 @@ router.get('/', isLoggedIn, function (req, res, next) {
     user = req.user
   } else {
     user = temp1
-    console.log(temp1)
+    //console.log(temp1)
   }
   res.render('index', { name: user.name, email: user.email, avatar: user.avatar, role: user.role });
 
@@ -250,4 +263,8 @@ function isLoggedIn(req, res, next) {
   }
   res.redirect('/login');
 }
+
+// router.get('/login', function (req, res, next) {
+//   res.render('temp');
+// })
 module.exports = router;
