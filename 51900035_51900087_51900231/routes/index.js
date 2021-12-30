@@ -14,6 +14,7 @@ var ObjectId = require("mongodb").ObjectId;
 var user;
 var temp = false;
 let temp1;
+let post;
 var bcrypt = require("bcryptjs");
 let error;
 var formatPWD = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,15}$/;
@@ -186,11 +187,36 @@ router.get('/allpost', isLoggedIn, function (req, res, next) {
     if (err) console.log(err);
 
     else {
-      res.send(result);
+      res.render('allpost', { username: user.name, email: user.email, avatar: user.avatar, content: user.content, result: result });
     }
   })
 });
 
+
+// router.post('/login', function (req, res, next) {
+//   var body = req.body;
+//   User.findOne({ email: req.body.email })
+//     .then(user => {
+//       if (user) {
+//         if (user.email === body.email && user.password === body.password) {
+//           const obj = JSON.parse(JSON.stringify(user));
+//           //console.log(temp1)
+//           temp1 = obj
+//           temp = true;
+//           return res.redirect('/');
+//         } else {
+//           const error = "Invalid Username or Password"
+//           console.log(error)
+//           return res.render('login', { error: error })
+//         }
+//       }
+//       else {
+//         const error = "Invalid Username or Password"
+//         console.log(error)
+//         return res.render('login', { error: error })
+//       }
+//     });
+// })
 
 router.get('/createAccount', isLoggedIn, function (req, res, next) {
   if (req.user) {
