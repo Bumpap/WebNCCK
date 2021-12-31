@@ -21,30 +21,31 @@
         <div class="col-md-3">
             <div class="card">
                 <div class="card-body">
-                    <img class="avAtar" src="{{avatar}}" alt="Avatar">
+                    <img class="avatar" id="avatar" src="{{avatar}}" alt="Avatar">
+                    <br>
                     <br>
                     {{#if student}}
-                    <a href="/profile-user" id="username" class="h5">{{name}}</a>
+                    <a href="/profile-user" name="username" id="username" class="h5">{{name}}</a>
                     {{/if}}
                     {{#if admin}}
-                    <a id="username" class="h5">{{name}}</a>
+                    <a id="username" name="username" class="h5">{{name}}</a>
                     {{/if}}
                     {{#if faculty}}
-                    <a id="username" class="h5">{{name}}</a>
+                    <a id="username" name="username" class="h5">{{name}}</a>
                     {{/if}}
-                    
+
                     <div class="h7 text-muted">{{email}}</div>
                     {{!-- {{#if role.equals("admin")}}
                     <TEXTAREA class=""></TEXTAREA>
                     {{/if}} --}}
                     {{!-- <div class="h7">Create account
                     </div> --}}
-                    <div class="avatar" id="avatar" style="display: none;">{{avatar}}</div>
+                    {{!-- <div class="avatar" id="avatar" style="display: none;">{{avatar}}</div> --}}
                 </div>
                 <ul class="list-group list-group-flush">
 
                     {{#if admin}}
-                        <li class="list-group-item">
+                    <li class="list-group-item">
                         <a href="/createAccount">
                             <div class="h6 text-muted">Create Account</div>
                         </a>
@@ -89,6 +90,112 @@
             </div>
         </div>
         <div class="col-md-6 gedf-main">
+
+            {{#if admin}}
+            <div class="card gedf-card">
+                <div class="card-header">
+                    <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="posts-tab" data-toggle="tab" href="#posts" role="tab"
+                                aria-controls="posts" aria-selected="true">Make a publication</a>
+                        </li>
+                        {{!-- <li class="nav-item">
+                            <a class="nav-link" id="images-tab" data-toggle="tab" role="tab" aria-controls="images"
+                                aria-selected="false" href="#images">Images</a>
+                        </li> --}}
+                    </ul>
+                </div>
+                <div class="card-body">
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="posts" role="tabpanel" aria-labelledby="posts-tab">
+                            <div class="form-group">
+                                <label class="sr-only" for="content">post</label>
+                                <textarea class="form-control" name="content" id="content" rows="3"
+                                    placeholder="Write your notification message here"></textarea>
+                            </div>
+
+                        </div>
+                        {{!-- <div class="tab-pane fade" id="images" role="tabpanel" aria-labelledby="images-tab">
+                            <div class="form-group">
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="customFile">
+                                    <label class="custom-file-label" id="customFile">Upload image</label>
+                                </div>
+                            </div>
+                            <div class="py-4"></div>
+                        </div> --}}
+                    </div>
+                    <div class="btn-toolbar justify-content-between">
+                        <div class="btn-group">
+                            <button id="postBtn" type="submit" class="btn btn-primary">Post</button>
+                        </div>
+                        <div class="btn-group">
+                            <button id="btnGroupDrop1" type="button" class="btn btn-link dropdown-toggle"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-globe"></i>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop1">
+                                <a class="dropdown-item" href="#"><i class="fa fa-globe"></i> Public</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{/if}}
+            {{!-- -------------------- --}}
+            {{#if faculty}}
+            <div class="card gedf-card">
+                <div class="card-header">
+                    <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="posts-tab" data-toggle="tab" href="#posts" role="tab"
+                                aria-controls="posts" aria-selected="true">Make a publication</a>
+                        </li>
+                        {{!-- <li class="nav-item">
+                            <a class="nav-link" id="images-tab" data-toggle="tab" role="tab" aria-controls="images"
+                                aria-selected="false" href="#images">Images</a>
+                        </li> --}}
+                    </ul>
+                </div>
+                <div class="card-body">
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="posts" role="tabpanel" aria-labelledby="posts-tab">
+                            <div class="form-group">
+                                <label class="sr-only" for="content">post</label>
+                                <textarea class="form-control" name="content" id="content" rows="3"
+                                    placeholder="Write your notification message here"></textarea>
+                            </div>
+
+                        </div>
+                        {{!-- <div class="tab-pane fade" id="images" role="tabpanel" aria-labelledby="images-tab">
+                            <div class="form-group">
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="customFile">
+                                    <label class="custom-file-label" id="customFile">Upload image</label>
+                                </div>
+                            </div>
+                            <div class="py-4"></div>
+                        </div> --}}
+                    </div>
+                    <div class="btn-toolbar justify-content-between">
+                        <div class="btn-group">
+                            <button id="postBtn" type="submit" class="btn btn-primary">Post</button>
+                        </div>
+                        <div class="btn-group">
+                            <button id="btnGroupDrop1" type="button" class="btn btn-link dropdown-toggle"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-globe"></i>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop1">
+                                <a class="dropdown-item" href="#"><i class="fa fa-globe"></i> Public</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{/if}}
+            {{!-- --------------------- --}}
+            {{#if student}}
             <div class="card gedf-card">
                 <div class="card-header">
                     <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
@@ -138,6 +245,7 @@
                     </div>
                 </div>
             </div>
+            {{/if}}
             <!-- Post /////-->
 
             <!--- \\\\\\\Post-->
@@ -148,7 +256,8 @@
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="mr-2">
-                                        <img class="rounded-circle" width="45" src="{{avatar}}" alt="">
+                                        <img id="avt_post" name="avt_post" class="rounded-circle" width="45" src=""
+                                            alt="">
                                     </div>
                                     <div class="ml-2">
                                         <div class="h5 m-0" id="display-name">@LeeCross</div>
@@ -187,8 +296,8 @@
                         </div>
                         <div class="card-footer">
                             <a href="#" class="card-link"><i class="fa fa-gittip"></i> Like</a>
-                            <a class="card-link" id="comment" data-toggle="modal"
-                                data-target="#commentModal"><i class="fa fa-comment" ></i> Comment</a>
+                            <a class="card-link" id="comment" data-toggle="modal" data-target="#commentModal"><i
+                                    class="fa fa-comment"></i> Comment</a>
                             <a href="#" class="card-link"><i class="fa fa-mail-forward"></i> Share</a>
                         </div>
                     </div>
@@ -198,27 +307,35 @@
 
 
         <div class="col-md-3">
-                <div class="card gedf-card">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                            card's content.</p>
-                        <a href="#" class="card-link">Card link</a>
-                        <a href="#" class="card-link">Another link</a>
-                    </div>
-                </div>
-                <div class="card gedf-card">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                                card's content.</p>
-                            <a href="#" class="card-link">Card link</a>
-                            <a href="#" class="card-link">Another link</a>
-                        </div>
-                    </div>
+            {{#if student}}
+            <div class="card gedf-card">
+                <template>
+                    <h1 class="card-creator"></h1>
+                    <h2 class="card-content"></h2>
+                    <h3 class="card-datetime"></h3>
+                </template>
             </div>
+            {{/if}}
+            {{#if faculty}}
+            <div class="card gedf-card">
+                <template>
+                    <h1 class="card-creator"></h1>
+                    <h2 class="card-content"></h2>
+                    <h3 class="card-datetime"></h3>
+                </template>
+            </div>
+            {{/if}}
+            {{#if admin}}
+            <div class="card gedf-card">
+                <template>
+                    <div class="card-creator"></div>
+                    <div class="card-content"></div>
+                    <div class="card-datetime"></div>
+                </template>
+            </div>
+            {{/if}}
+
+        </div>
 
     </div>
 </div>
@@ -257,7 +374,7 @@
                 </button>
             </div>
             <div class="modal-body" id="cmt">
-                <template>   
+                <template>
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="mr-2">
                             <img class="rounded-circle" width="35" src="{{avatar}}" alt="">
@@ -271,7 +388,7 @@
                             ipsa
                         </p>
                     </div>
-                </template> 
+                </template>
             </div>
             <div class="modal-footer">
                 <img class="rounded-circle" width="35" src="{{avatar}}" alt="">

@@ -15,8 +15,8 @@
 								<div id="avatar" class="user-avatar">
 									<img src="{{avatar}}">
 								</div>
-								<h5 id="name" class="user-name">{{username}}</h5>
-								<h6 id="email" class="user-email">{{email}}</h6>
+								<h5 id="name" name="name" class="user-name">{{username}}</h5>
+								<h6 id="email" name="email" class="user-email">{{email}}</h6>
 								{{!-- <div class="avatar" id="id" style="display: none;">{{id}}</div> --}}
 							</div>
 
@@ -63,6 +63,16 @@
 						</div>
 						<div class="row gutters">
 							<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+								{{#if error}}
+								<div class="text-left">
+									<p class="err-msg">Already Exist Email Address</p>
+								</div>
+								{{/if }}
+								{{#if success}}
+								<div class="text-left">
+									<p class="succ-msg">Registered Successfully</p>
+								</div>
+								{{/if }}
 								<div class="text-right">
 									<a href="/"> <button type="button" id="cancel" name="submit"
 											class="btn btn-secondary">Cancel</button></a>

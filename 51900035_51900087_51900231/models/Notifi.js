@@ -1,11 +1,10 @@
 const mongoose = require('mongoose')
-const postSchema = mongoose.Schema({
+const notifiSchema = mongoose.Schema({
     content: String,
     creator: String,
-    avatar: String,
     created_at: Date,
     updated_at: Date
 })
 
-const Post = mongoose.model('Post', postSchema)
-module.exports = Post
+const Notifi = mongoose.model('Notifi', notifiSchema)
+module.exports = Notifi

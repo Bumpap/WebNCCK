@@ -3,11 +3,14 @@ const Post = require('../models/Post');
 const { post } = require('../routes/posts');
 var ObjectId = require("mongodb").ObjectId;
 
+
 class PostController {
+
     create(req, res) {
         new Post({
             content: req.body.content,
-            creator: req.user.name,
+            creator: req.user.name, //lấy username từ session
+            avatar: req.user.avatar,
             created_at: new Date(),
             updated_at: new Date()
         }).save(function (err) {
