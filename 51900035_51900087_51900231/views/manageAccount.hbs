@@ -1,0 +1,61 @@
+<form method="POST">
+    <div class="container">
+        <nav aria-label="breadcrumb" class="main-breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Manage account</li>
+            </ol>
+        </nav>
+        <div class="row gutters">
+            <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="account-settings">
+                            <div class="user-profile">
+                                <div id="avatar" class="user-avatar">
+                                    <img src="{{avatar}}">
+                                </div>
+                                <h5 id="name" name="name" class="user-name">{{username}}</h5>
+                                <h6 id="email" name="email" class="user-email">{{email}}</h6>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="row gutters">
+                            <div class="table-container">
+                                <table>
+                                    <tr class="table-layout">
+                                        <th>STT</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Password</th>
+                                        <th>Role</th>
+                                        <th>Created at</th>
+                                        <th>Update at</th>
+                                    </tr>
+                                    {{#each result}}
+                                    <tr>
+                                        <td>{{@key}}</td>
+                                        <td>{{name}}</td>
+                                        <td>{{email}}</td>
+                                        <td>{{password}}</td>
+                                        <td>{{role}}</td>
+                                        <td>{{created}}</td>
+                                        <td>{{updated}}</td>
+                                    </tr>
+                                    {{/each}}
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<br>
