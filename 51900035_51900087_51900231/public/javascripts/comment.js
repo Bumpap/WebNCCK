@@ -55,11 +55,15 @@ $(document).ready(function () {
                             console.log(username)
                             var avtCmt = clone.querySelector("#avatarcmt");
                             avtCmt.src = avatar;
-                            var contentCmt = clone.querySelector("#comment-name");
-                            contentCmt.innerHTML = comment;
+                            console.log(avatar)
+                            var contentCmt = clone.querySelector("#user-comments");
+                            contentCmt.value = comment;
+                            console.log(comment)
+                            
                             var datetime = clone.querySelector("#date-time");
-                            var date = new Date(data[i].created_at)
+                            var date = new Date(new Date());
                             datetime.innerHTML = date.toUTCString()
+                            console.log(date)
 
                             document.getElementById('user-status-comment').value = '';
                         } else {
