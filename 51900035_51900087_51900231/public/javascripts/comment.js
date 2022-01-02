@@ -1,24 +1,26 @@
 $(document).ready(function () {
-    var socket = io();
-    socket.on('comment message', function (data) {
-        insertComment(data.username, data.message, data.datetime);
-    });
-    function insertComment(username, message, datetime, avatar) {
-        var temp = document.getElementsByTagName("template")[0];
-        var clone = temp.content.cloneNode(true);
-        var nameEl = clone.querySelector("#comment-name");
-        nameEl.innerHTML = username;
-        var datetimeEl = clone.querySelector("#date-time");
-        datetimeEl.innerHTML = datetime;
-        var commentsEl = clone.querySelector("#user-comments");
-        commentsEl.innerHTML = message;
-        document.getElementById('cmt').prepend(clone);
-    }
+    // var socket = io();
+    // socket.on('comment message', function (data) {
+    //     insertComment(data.username, data.message, data.datetime);
+    // });
+    // function insertComment(username, message, datetime, avatar) {
+    //     var temp = document.getElementsByTagName("template")[0];
+    //     var clone = temp.content.cloneNode(true);
+    //     var nameEl = clone.querySelector("#comment-name");
+    //     nameEl.innerHTML = username;
+    //     var datetimeEl = clone.querySelector("#date-time");
+    //     datetimeEl.innerHTML = datetime;
+    //     var commentsEl = clone.querySelector("#user-comments");
+    //     commentsEl.innerHTML = message;
+    //     document.getElementById('cmt').prepend(clone);
+    // }
     document.getElementById("commentBtn").onclick = function (e) {
         e.preventDefault();
         var a = document.getElementById('user-status-comment').value
         let data = {
-            comment: document.getElementById('user-status-comment').value,
+            content: document.getElementById('user-status-comment').value,
+            creator: document.getElementById('username').innerHTML,
+            avatar: document.getElementById('avatar').src
         }
         if (a == '') {
             alert("Null");
@@ -41,13 +43,24 @@ $(document).ready(function () {
                     response.json().then(function (data) {
                         if (data.success == 'true') {
                             let username = document.getElementById('username').innerHTML;
-                            let message = document.getElementById('comment').value;
-                            let avatar = document.getElementById('avatar').innerHTML;
+                            let comment = document.getElementById('user-status-comment').value;
+                            let avatar = document.getElementById('avatar').src;
                             //var image = document.getElementById('customFile').value;
                             var datetime = new Date().toLocaleString().replace(",", "").replace("/:.. /", " ");
-                            insertComment(username, message, datetime, avatar);
                             //emit data after post 
-                            socket.emit('comment message', { username: username, message: message, datetime: datetime, avatar: avatar });
+                            var temp = document.getElementsByTagName("template")[2];
+                            var clone = temp.content.cloneNode(true);
+                            var nameCmt = clone.querySelector("#namecmt");
+                            nameCmt.innerHTML = username;
+                            console.log(username)
+                            var avtCmt = clone.querySelector("#avatarcmt");
+                            avtCmt.src = avatar;
+                            var contentCmt = clone.querySelector("#comment-name");
+                            contentCmt.innerHTML = comment;
+                            var datetime = clone.querySelector("#date-time");
+                            var date = new Date(data[i].created_at)
+                            datetime.innerHTML = date.toUTCString()
+
                             document.getElementById('user-status-comment').value = '';
                         } else {
                             console.log("error")

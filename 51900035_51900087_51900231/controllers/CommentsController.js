@@ -7,11 +7,11 @@ class CommentsController {
 
     create(req, res) {
         new Comment({
-            post_id: String,
-            comment: req.body.comment,
-            creator: req.user.name,
-            create_: new Date(),
-            update_: new Date(),
+            content: req.body.content,
+            creator: req.user.name, //lấy username từ session
+            avatar: req.user.avatar,
+            created_at: new Date(),
+            updated_at: new Date()
         }).save(function (err) {
             if (err) {
                 console.log(err);
@@ -24,10 +24,10 @@ class CommentsController {
 
 
 
-    async list(req, res) {
-        let comments = await Comment.find().sort([[]]);
-        res.json(comments);
-    }
+    // async list(req, res) {
+    //     let comments = await Comment.find().sort([[]]);
+    //     res.json(comments);
+    // }
 }
 
 module.exports = new CommentsController
