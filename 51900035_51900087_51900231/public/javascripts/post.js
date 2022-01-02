@@ -21,10 +21,10 @@ $(document).ready(function () {
                     avtEL.src = data[i].avatar;
                     var statusEl = clone.querySelector("#user-status");
                     statusEl.innerHTML = data[i].content;
-                    var deleteBtn = clone.querySelector("#delete");
-                    deleteBtn.setAttribute('data-id', data[i]._id);
-                    var editBtn = clone.querySelector("#edit");
-                    editBtn.setAttribute('data-id', data[i]._id);
+                    // var deleteBtn = clone.querySelector("#delete");
+                    // deleteBtn.setAttribute('data-id', data[i]._id);
+                    // var editBtn = clone.querySelector("#edit");
+                    // editBtn.setAttribute('data-id', data[i]._id);
                     var datetimeEl = clone.querySelector("#datetime");
                     var date = new Date(data[i].created_at)
                     datetimeEl.innerHTML = date.toUTCString()

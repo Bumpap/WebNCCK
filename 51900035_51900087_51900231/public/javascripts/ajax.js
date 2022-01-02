@@ -48,7 +48,9 @@ $(document).ready(function () {
             contentType: "application/json",
             data: JSON.stringify({ id: id }),
             success: function (res) {
+                console.log(res);
                 let div = document.getElementById(res);
+                console.log(div);
                 div.remove();
             }
 
