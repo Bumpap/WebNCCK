@@ -89,12 +89,8 @@ router.post('/profile-user', isLoggedIn, function (req, res, next) {
   })
   res.render('profile', { authId: req.user.authId, avatar: req.user.avatar, email: req.user.email, name: req.user.name, lop: req.body.lop, khoa: req.body.khoa });
 });
-var session = require('express-session');
-router.use(session({
-  secret: 'mySecretKey',
-  resave: true,
-  saveUninitialized: false
-}));
+
+
 
 router.get('/changePWD', isLoggedIn, function (req, res, next) {
   user = temp1
@@ -124,11 +120,6 @@ router.post('/changePWD', isLoggedIn, function (req, res, next) {
     res.render('changePWD', { error: error, name: user.name, email: user.email, avatar: user.avatar, role: user.role })
 
   }
-  // else if (newPWD !== formatPWD || confPWD !== formatPWD) {
-  //   error = "Password must be containt a character"
-  //   res.render('changePWD', { error: error, name: user.name, email: user.email, avatar: user.avatar, role: user.role })
-
-  // }
   else {
     var data = { password: newPWD };
     query = { email: user.email };
@@ -193,31 +184,6 @@ router.get('/allpost', isLoggedIn, function (req, res, next) {
 });
 
 
-// router.post('/login', function (req, res, next) {
-//   var body = req.body;
-//   User.findOne({ email: req.body.email })
-//     .then(user => {
-//       if (user) {
-//         if (user.email === body.email && user.password === body.password) {
-//           const obj = JSON.parse(JSON.stringify(user));
-//           //console.log(temp1)
-//           temp1 = obj
-//           temp = true;
-//           return res.redirect('/');
-//         } else {
-//           const error = "Invalid Username or Password"
-//           console.log(error)
-//           return res.render('login', { error: error })
-//         }
-//       }
-//       else {
-//         const error = "Invalid Username or Password"
-//         console.log(error)
-//         return res.render('login', { error: error })
-//       }
-//     });
-// })
-
 router.get('/createAccount', isLoggedIn, function (req, res, next) {
   if (req.user) {
     user = req.user
@@ -225,11 +191,27 @@ router.get('/createAccount', isLoggedIn, function (req, res, next) {
     user = temp1
     //console.log(temp1)
   }
-  console.log(session.name)
+  res.render('createAccount', { username: "AdminTDT", email: "admin@tdtu.edu.vn", avatar: user.avatar });
 
-  res.render('createAccount', { username: user.name, email: user.email, avatar: user.avatar, lop: user.lop, khoa: user.khoa });
 })
 
+router.get('/manageAccount', isLoggedIn, function (req, res, next) {
+  if (req.user) {
+    user = req.user
+  } else {
+    user = temp1
+    //console.log(temp1)
+  }
+  User.find({}, function (err, result) {
+    if (err) console.log(err);
+
+    else {
+      console.log(result)
+      var i = 0;
+      res.render('manageAccount', { username: user.name, email: user.email, avatar: user.avatar, content: user.content, result: result });
+    }
+  })
+})
 
 router.post('/createAccount', isLoggedIn, function (req, res, next) {
   user = temp1
