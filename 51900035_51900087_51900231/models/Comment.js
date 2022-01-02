@@ -1,10 +1,10 @@
 const mongoose = require('mongoose')
 const commentSchema = mongoose.Schema({
-    post_id: String,
-    comment: String,
+    content: String,
     creator: String,
-    create_: Date,
-    update_: Date
+    avatar: String,
+    created_at: Date,
+    updated_at: Date
 })
 
 const Comment = mongoose.model('Comment', commentSchema)
