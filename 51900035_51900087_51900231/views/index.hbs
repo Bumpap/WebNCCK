@@ -1,20 +1,22 @@
 <nav class="navbar navbar-light bg-white">
     <a href="/" class="navbar-brand">HỆ THỐNG THÔNG TIN SINH VIÊN</a>
-    <form class="form-inline">
+    <form class="form-inline" method="POST">
         <div class="input-group">
-            <input type="text" class="form-control" aria-label="Recipient's username" aria-describedby="button-addon2">
+            <input id="contentPost" name="contentPost" type="text" class="form-control"
+                aria-label="Recipient's username" aria-describedby="button-addon2">
             <div class="input-group-append">
-                <button class="btn btn-outline-primary" type="button" id="button-addon2">
-                    <i class="fa fa-search"></i>
-                </button>
-                <a href="/logout" class="btn btn-info btn-lg">
-                    <span class="glyphicon glyphicon-log-out"></span> Log out
+                <a href="/viewPost">
+                    <button class="btn btn-outline-primary" type="button" id=" button-addon2">
+                        <i class="fa fa-search"></i>
+                    </button>
                 </a>
             </div>
         </div>
     </form>
+    <a href="/logout" class="btn btn-info btn-lg">
+        <span class="glyphicon glyphicon-log-out"></span> Log out
+    </a>
 </nav>
-
 
 <div class="container-fluid gedf-wrapper">
     <div class="row">
@@ -35,12 +37,6 @@
                     {{/if}}
 
                     <div class="h7 text-muted">{{email}}</div>
-                    {{!-- {{#if role.equals("admin")}}
-                    <TEXTAREA class=""></TEXTAREA>
-                    {{/if}} --}}
-                    {{!-- <div class="h7">Create account
-                    </div> --}}
-                    {{!-- <div class="avatar" id="avatar" style="display: none;">{{avatar}}</div> --}}
                 </div>
                 <ul class="list-group list-group-flush">
 
@@ -144,10 +140,7 @@
                             <a class="nav-link active" id="posts-tab" data-toggle="tab" href="#posts" role="tab"
                                 aria-controls="posts" aria-selected="true">Make a publication</a>
                         </li>
-                        {{!-- <li class="nav-item">
-                            <a class="nav-link" id="images-tab" data-toggle="tab" role="tab" aria-controls="images"
-                                aria-selected="false" href="#images">Images</a>
-                        </li> --}}
+
                     </ul>
                 </div>
                 <div class="card-body">
@@ -160,15 +153,7 @@
                             </div>
 
                         </div>
-                        {{!-- <div class="tab-pane fade" id="images" role="tabpanel" aria-labelledby="images-tab">
-                            <div class="form-group">
-                                <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="customFile">
-                                    <label class="custom-file-label" id="customFile">Upload image</label>
-                                </div>
-                            </div>
-                            <div class="py-4"></div>
-                        </div> --}}
+
                     </div>
                     <div class="btn-toolbar justify-content-between">
                         <div class="btn-group">
@@ -257,19 +242,7 @@
 
                                     </div>
                                 </div>
-                                {{!-- <div>
-                                    <div class="dropdown">
-                                        <button class="btn btn-link dropdown-toggle" type="button" id="gedf-drop1"
-                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="fa fa-ellipsis-h"></i>
-                                        </button>
-                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop1">
-                                            <div class="h6 dropdown-header">Configuration</div>
-                                            <button class="dropdown-item">Edit</button>
-                                            <button class="dropdown-item">Delete</button>
-                                        </div>
-                                    </div>
-                                </div> --}}
+
                             </div>
 
                         </div>
@@ -295,7 +268,7 @@
                     </div>
                 </template>
             </div>
-            
+
         </div>
 
 

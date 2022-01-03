@@ -93,7 +93,10 @@ width: 2em;
 .input-group{
   margin-bottom: 10px;
 }
-
+.form-inline{
+	margin-left: auto;
+	margin-right: auto;
+}
 
 @media (min-width: 768px) {
   .omb_login .omb_forgotPwd {
@@ -147,6 +150,7 @@ width: 2em;
     -moz-border-radius: 2px;
     border-radius: 2px;
     font-size: .825rem;
+	width:100%;
     background: #ffffff;
     color: #2e323c;
 }

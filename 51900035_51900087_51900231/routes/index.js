@@ -252,7 +252,33 @@ router.post('/createAccount', isLoggedIn, function (req, res, next) {
   }
 });
 
+router.get('/viewPost', isLoggedIn, function (req, res, next) {
+  if (req.user) {
+    user = req.user
+  } else {
+    user = temp1
+    //console.log(temp1)
+  }
+  res.render('viewPost', { username: user.name, email: user.email, avatar: user.avatar })
 
+});
+
+router.post('/viewPost', isLoggedIn, function (req, res, next) {
+  if (req.user) {
+    user = req.user
+  } else {
+    user = temp1
+    //console.log(temp1)
+
+  }
+  //console.log(req.body.contentPost)
+  Post.find({ creator: req.body.contentPost }, function (err, result) {
+    if (err) console.log(err);
+    else {
+      res.render('viewPost', { username: user.name, email: user.email, avatar: user.avatar, result: result });
+    }
+  })
+});
 
 router.get('/', isLoggedIn, function (req, res, next) {
   if (req.user) {
@@ -295,13 +321,13 @@ router.post('/login', function (req, res, next) {
           return res.redirect('/');
         } else {
           const error = "Invalid Username or Password"
-          console.log(error)
+          //console.log(error)
           return res.render('login', { error: error })
         }
       }
       else {
         const error = "Invalid Username or Password"
-        console.log(error)
+        //console.log(error)
         return res.render('login', { error: error })
       }
     });

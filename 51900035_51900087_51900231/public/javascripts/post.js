@@ -68,7 +68,6 @@ $(document).ready(function () {
     document.getElementById("postBtn").onclick = function (e) {
         e.preventDefault();
         var a = document.getElementById('content').value
-        //console.log(a)
         let data = {
             content: document.getElementById('content').value,
             creator: document.getElementById('username').innerHTML,
@@ -97,10 +96,6 @@ $(document).ready(function () {
                             let username = document.getElementById('username').innerHTML;
                             let message = document.getElementById('content').value;
                             let avatar = document.getElementById('avatar').src;
-                            //console.log(avatar);
-                            //console.log(JSON.parse(data))
-                            //var image = document.getElementById('customFile').value;
-
                             var datetime = new Date(new Date());
                             datetime.toUTCString();
                             console.log(datetime);
@@ -114,6 +109,4 @@ $(document).ready(function () {
                     })
                 })
     }
-
-    //post notificatio
 })
