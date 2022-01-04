@@ -1,4 +1,45 @@
 $(document).ready(function () {
+
+    function getPosts() {
+        fetch('/comments/list').then(response => {
+            if (response.status !== 200) {
+                console.log("Looks like there was a problem. Status Code: " + response.status);
+                return;
+            }
+            response.json().then(data => {
+                for (let i = 0; i < data.length; i++) {
+                    var temp = document.getElementsByTagName("template")[2];
+                    var clone = temp.content.cloneNode(true);
+                    var cardbody = clone.querySelector(".form-control");
+                    cardbody.setAttribute('id', data[i]._id);
+                    var nameCmt = clone.querySelector("#comment-name");
+                    nameCmt.innerHTML = data[i].creator;
+                    console.log(username)            
+                    var avtCmt = clone.querySelector("#avatarcmt");
+                    avtCmt.src = data[i].avatar;
+                    var contentCmt = clone.querySelector("#user-comments");
+                    contentCmt.innerHTML = data[i].content;
+                    console.log(username)
+                    var date_time = clone.querySelector("#date-time");
+                    var date = new Date(data[i].created_at);
+                    date_time.innerHTML = date.toUTCString()
+                    // console.log(date)
+                    document.getElementById('cmt').prepend(clone);
+                }
+            })
+        })
+    }
+
+    getPosts();
+    // console.log("Page " + page);
+
+
+    // window.onscroll = () => {
+    //     var loadpage = (document.documentElement.scrollTop + window.innerHeight) === document.documentElement.offsetHeight;
+    //     if (loadpage) {
+    //         getPosts();
+    //     }
+    // }
     // var socket = io();
     // socket.on('comment message', function (data) {
     //     insertComment(data.username, data.message, data.datetime);
@@ -18,6 +59,7 @@ $(document).ready(function () {
         e.preventDefault();
         var a = document.getElementById('user-status-comment').value
         let data = {
+            // id_post: ,
             content: document.getElementById('user-status-comment').value,
             creator: document.getElementById('username').innerHTML,
             avatar: document.getElementById('avatar').src

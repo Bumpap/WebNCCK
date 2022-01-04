@@ -13,7 +13,7 @@ $(document).ready(function () {
                 for (let i = 0; i < data.length; i++) {
                     var temp = document.getElementsByTagName("template")[0];
                     var clone = temp.content.cloneNode(true);
-                    var cardbody = clone.querySelector(".card-body");
+                    var cardbody = clone.querySelector(".form-control");
                     cardbody.setAttribute('id', data[i]._id);
                     var nameEl = clone.querySelector("#display-name");
                     nameEl.innerHTML = data[i].creator;

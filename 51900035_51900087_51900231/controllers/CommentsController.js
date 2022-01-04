@@ -23,7 +23,6 @@ class CommentsController {
     }
 
 
-
     async list(req, res) {
         let comments = await Comment.find().sort([[]]);
         res.json(comments);

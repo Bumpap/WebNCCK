@@ -363,6 +363,13 @@
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalCenterTitle">Comment</h5>
             </div>
+            <div class="modal-footer" >
+                
+                <img class="rounded-circle" width="20" id="avatarcmt" src="{{avatar}}" alt="">
+                <input class="form-control" name="comment-content" id="user-status-comment" rows="3"></input>
+                <button id="commentBtn" type="submit" class="btn btn-primary">Post</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
             <div class="modal-body" id="cmt">
                 <template>
                     <div class="form-control">
@@ -378,12 +385,6 @@
                         </p>
                     </div>
                 </template>
-            </div>
-            <div class="modal-footer">
-                <img class="rounded-circle" width="20" id="avatarcmt" src="{{avatar}}" alt="">
-                <input class="form-control" name="comment-content" id="user-status-comment" rows="3"></input>
-                <button id="commentBtn" type="submit" class="btn btn-primary">Post</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
