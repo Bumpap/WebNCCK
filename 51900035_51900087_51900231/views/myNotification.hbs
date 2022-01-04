@@ -35,9 +35,9 @@
             <!-- Post /////-->
 
             <!--- \\\\\\\Post-->
-            <div class="" id="status">
+            <div class="card gedf-card" id="status">
                 {{#each result}}
-                <div class="form-control" id={{_id}}>
+                <div class="card-body" id={{_id}}>
                     <div class="card-header">
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="d-flex justify-content-between align-items-center">
@@ -49,7 +49,7 @@
 
                                 </div>
                             </div>
-                            {{!-- <div>
+                            <div>
                                 <div class="dropdown">
                                     <button class="btn btn-link dropdown-toggle" type="button" id="gedf-drop1"
                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -59,10 +59,10 @@
                                         <div class="h6 dropdown-header">Configuration</div>
                                         <button class="dropdown-item" data-id={{_id}} id="edit" data-toggle="modal"
                                             data-target="#editModal">Edit</button>
-                                        <button class="dropdown-item" data-id={{_id}} id="delete">Delete</button>
+                                        <button class="dropdown-item" data-id={{_id}} id="deleteNotifi">Delete</button>
                                     </div>
                                 </div>
-                            </div> --}}
+                            </div>
                         </div>
 
                     </div>

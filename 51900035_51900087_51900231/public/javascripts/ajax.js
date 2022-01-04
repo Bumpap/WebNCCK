@@ -57,6 +57,26 @@ $(document).ready(function () {
         })
     })
 
+
+    $("body").on("click", "#deleteNotifi", (event) => {
+        event.preventDefault();
+        let id = $(event.target).data("id");
+
+        $.ajax({
+            url: "/deleteNotifi",
+            method: "POST",
+            contentType: "application/json",
+            data: JSON.stringify({ id: id }),
+            success: function (res) {
+                console.log(res);
+                let div = document.getElementById(res);
+                console.log(div);
+                div.remove();
+            }
+
+        })
+    })
+
     $("body").on("click", "#edit", (event) => {
         event.preventDefault();
         let id = $(event.target).data("id");
