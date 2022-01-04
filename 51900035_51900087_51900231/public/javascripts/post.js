@@ -13,7 +13,7 @@ $(document).ready(function () {
                 for (let i = 0; i < data.length; i++) {
                     var temp = document.getElementsByTagName("template")[0];
                     var clone = temp.content.cloneNode(true);
-                    var cardbody = clone.querySelector(".card-body");
+                    var cardbody = clone.querySelector(".form-control");
                     cardbody.setAttribute('id', data[i]._id);
                     var nameEl = clone.querySelector("#display_name");
                     nameEl.innerHTML = data[i].creator;
@@ -97,7 +97,6 @@ $(document).ready(function () {
                             //console.log(avatar);
                             //console.log(JSON.parse(data))
                             //var image = document.getElementById('customFile').value;
-
                             var datetime = new Date(new Date());
                             datetime.toUTCString();
                             console.log(datetime);

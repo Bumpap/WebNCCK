@@ -227,9 +227,9 @@
             <!-- Post /////-->
 
             <!--- \\\\\\\Post-->
-            <div class="card gedf-card" id="status">
+            <div id="status">
                 <template>
-                    <div class="card-body">
+                    <div class="form-control">
                         <div class="card-header">
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="d-flex justify-content-between align-items-center">
@@ -333,26 +333,28 @@
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalCenterTitle">Comment</h5>
             </div>
-            <div class="modal-body" id="cmt">
-                <template>
-                    <div class="mr-2" id="avatarcmt">
-                        <img class="rounded-circle" width="35" src="{{avatar}}" alt="">
-                    </div>
-                    <div class="ml-2" id="namecmt">
-                        <div class="h6 m-0" id="comment-name">@LeeCross</div>
-                    </div>
-                    <div class="text-muted h7 mb-2" id="date-time"> <i class="fa fa-clock-o"></i>10 min ago</div>
-                    <p id="user-comments" class="card-text">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo recusandae nulla rem eos
-                        ipsa
-                    </p>
-                </template>
-            </div>
-            <div class="modal-footer">
-                <img class="rounded-circle" width="35" src="{{avatar}}" alt="">
-                <textarea class="form-control" name="comment-content" id="user-status-comment" rows="3"></textarea>
+            <div class="modal-footer" >
+                
+                <img class="rounded-circle" width="20" id="avatarcmt" src="{{avatar}}" alt="">
+                <input class="form-control" name="comment-content" id="user-status-comment" rows="3"></input>
                 <button id="commentBtn" type="submit" class="btn btn-primary">Post</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+            <div class="modal-body" id="cmt">
+                <template>
+                    <div class="form-control">
+                        <div>
+                            <img class="rounded-circle" id="avatarcmt" width="25" src="{{avatar}}" alt="">
+                        </div>
+                        <div>
+                            <div class="h6 m-0" id="comment-name">@LeeCross</div>
+                        </div>
+                        <div class="text-muted h7 mb-2" id="date-time"> <i class="fa fa-clock-o"></i>10 min ago</div>
+                        <p id="user-comments" class="card-text">
+                            
+                        </p>
+                    </div>
+                </template>
             </div>
         </div>
     </div>
