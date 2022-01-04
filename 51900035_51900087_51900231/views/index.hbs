@@ -63,6 +63,12 @@
                         </a>
 
                     </li>
+                    <li class="list-group-item">
+                        <a href="/allNotifi" id="allpost">
+                            <div class="h6 text-muted">Notifications</div>
+                        </a>
+
+                    </li>
                     {{/if}} {{!-- Role admin --}}
 
                     {{#if faculty}}
@@ -77,12 +83,26 @@
                         </a>
 
                     </li>
+
+                    <li class="list-group-item">
+                        <a href="/allNotifi" id="allpost">
+                            <div class="h6 text-muted">Notifications</div>
+                        </a>
+
+                    </li>
                     {{/if}} {{!-- Role Phòng ban --}}
 
                     {{#if student}}
                     <li class="list-group-item">
                         <a href="/allpost" id="allpost">
                             <div class="h6 text-muted">Posts</div>
+                        </a>
+
+                    </li>
+
+                    <li class="list-group-item">
+                        <a href="/allNotifi" id="allpost">
+                            <div class="h6 text-muted">Notifications</div>
                         </a>
 
                     </li>
@@ -93,14 +113,16 @@
         </div>
         <div class="col-md-6 gedf-main">
 
-            {{#if admin}}
+            {{!-- Phòng/Khoa đăng thông báo --}}
+            {{#if faculty}}
             <div class="card gedf-card">
                 <div class="card-header">
                     <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link active" id="posts-tab" data-toggle="tab" href="#posts" role="tab"
+                            <a class="nav-link active" id="posts-tab" data-toggle="tab" href="#notifis" role="tab"
                                 aria-controls="posts" aria-selected="true">Make a publication</a>
                         </li>
+
                     </ul>
                 </div>
                 <div class="card-body">
@@ -108,15 +130,16 @@
                         <div class="tab-pane fade show active" id="posts" role="tabpanel" aria-labelledby="posts-tab">
                             <div class="form-group">
                                 <label class="sr-only" for="content">post</label>
-                                <textarea class="form-control" name="content" id="content" rows="3"
+                                <textarea class="form-control" name="contentNoti" id="contentNoti" rows="3"
                                     placeholder="Write your notification message here"></textarea>
                             </div>
 
                         </div>
+
                     </div>
                     <div class="btn-toolbar justify-content-between">
                         <div class="btn-group">
-                            <button id="postBtn" type="submit" class="btn btn-primary">Post</button>
+                            <button id="notifiBtn" type="submit" class="btn btn-primary">Post</button>
                         </div>
                         <div class="btn-group">
                             <button id="btnGroupDrop1" type="button" class="btn btn-link dropdown-toggle"
@@ -132,15 +155,15 @@
             </div>
             {{/if}}
             {{!-- -------------------- --}}
-            {{#if faculty}}
+            {{!-- Admin đăng thông báo --}}
+            {{#if admin}}
             <div class="card gedf-card">
                 <div class="card-header">
                     <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link active" id="posts-tab" data-toggle="tab" href="#posts" role="tab"
+                            <a class="nav-link active" id="posts-tab" data-toggle="tab" href="#notifis" role="tab"
                                 aria-controls="posts" aria-selected="true">Make a publication</a>
                         </li>
-
                     </ul>
                 </div>
                 <div class="card-body">
@@ -148,16 +171,14 @@
                         <div class="tab-pane fade show active" id="posts" role="tabpanel" aria-labelledby="posts-tab">
                             <div class="form-group">
                                 <label class="sr-only" for="content">post</label>
-                                <textarea class="form-control" name="content" id="content" rows="3"
+                                <textarea class="form-control" name="contentNoti" id="contentNoti" rows="3"
                                     placeholder="Write your notification message here"></textarea>
                             </div>
-
                         </div>
-
                     </div>
                     <div class="btn-toolbar justify-content-between">
                         <div class="btn-group">
-                            <button id="postBtn" type="submit" class="btn btn-primary">Post</button>
+                            <button id="notifiBtn" type="submit" class="btn btn-primary">Post</button>
                         </div>
                         <div class="btn-group">
                             <button id="btnGroupDrop1" type="button" class="btn btn-link dropdown-toggle"
@@ -173,6 +194,7 @@
             </div>
             {{/if}}
             {{!-- --------------------- --}}
+            {{!-- Sinh viên đăng bài viết --}}
             {{#if student}}
             <div class="card gedf-card">
                 <div class="card-header">
@@ -225,7 +247,7 @@
             </div>
             {{/if}}
             <!-- Post /////-->
-
+            {{!-- Hiển thị bài viết --}}
             <!--- \\\\\\\Post-->
             <div id="status">
                 <template>
@@ -269,37 +291,25 @@
         </div>
 
 
-        <div class="col-md-3">
-            {{#if student}}
-            <div class="card gedf-card">
-                <template>
-                    <h1 class="card-creator"></h1>
-                    <h2 class="card-content"></h2>
-                    <h3 class="card-datetime"></h3>
-                </template>
-            </div>
-            {{/if}}
-            {{#if faculty}}
-            <div class="card gedf-card">
-                <template>
-                    <h1 class="card-creator"></h1>
-                    <h2 class="card-content"></h2>
-                    <h3 class="card-datetime"></h3>
-                </template>
-            </div>
-            {{/if}}
-            {{#if admin}}
-            <div class="card gedf-card">
-                <template>
-                    <div class="card-creator"></div>
-                    <div class="card-content"></div>
-                    <div class="card-datetime"></div>
-                </template>
-            </div>
-            {{/if}}
+        <div class="col-md-3" id="notifi">
+            <template>
+                <div class="card gedf-card">
+                    <div class="toast">
+                        <div class="toast__icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="toast__body">
+                            <h3 class="toast__title">Notifications</h3>
+                            <p class="toast__msg" id="notifToast" name="notifToast">Khoa đã đăng một thông báo mới!</p>
+                        </div>
+                        <div class="toast__close">
+                            <i class="fas fa-times"></i>
+                        </div>
+                    </div>
 
+                </div>
+            </template>
         </div>
-
     </div>
 </div>
 
@@ -349,7 +359,8 @@
                         <div>
                             <div class="h6 m-0" id="comment-name">@LeeCross</div>
                         </div>
-                        <div class="text-muted h7 mb-2" id="date-time"> <i class="fa fa-clock-o"></i>10 min ago</div>
+                        <div class="text-muted h7 mb-2" id="date-time"> <i class="fa fa-clock-o"></i>10 min ago
+                        </div>
                         <p id="user-comments" class="card-text">
 
                         </p>

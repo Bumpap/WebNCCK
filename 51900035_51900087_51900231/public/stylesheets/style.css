@@ -353,3 +353,42 @@ td, th {
 	text-align: center;
 }
 
+/* Notifications */
+
+.toast{
+	display: flex;
+	border-color: #47d864;
+	align-items: center;
+	background-color:white;
+	border-radius:2px;
+	border-left: 4px solid;
+	box-shadow: 0px 5px 8px rgba(0, 0, 0, 0.08);
+	padding: 20px 0;
+}
+.toast , .toast__icon{
+	color: #47d864;
+}
+.toast__icon{
+	font-size: 24px;
+}
+.toast__close{
+	font-size: 20px;
+	color: rgba(0, 0, 0, 0.3);
+	cursor: pointer;
+}
+.toast__icon, .toast__close{
+	padding: 0 16px;
+}
+.toast__body{
+
+}
+.toast__title{
+	font-size: 16px;
+	font-weight: 600;
+	color: #333;
+}
+.toast__msg{
+	font-size: 14px;
+	margin-top: 4px;
+	color: #888;
+}

@@ -10,6 +10,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var db = require('../db');
 var User = require('../models/User');
+var Notifi = require('../models/Notifi');
 var ObjectId = require("mongodb").ObjectId;
 var user;
 var temp = false;
@@ -179,6 +180,22 @@ router.get('/allpost', isLoggedIn, function (req, res, next) {
 
     else {
       res.render('allpost', { username: user.name, email: user.email, avatar: user.avatar, content: user.content, result: result });
+    }
+  })
+});
+
+router.get('/allNotifi', isLoggedIn, function (req, res, next) {
+  if (req.user) {
+    user = req.user
+  } else {
+    user = temp1
+    //console.log(temp1)
+  }
+  Notifi.find({}, function (err, result) {
+    if (err) console.log(err);
+
+    else {
+      res.render('allNotifi', { username: user.name, email: user.email, avatar: user.avatar, content: user.content, result: result });
     }
   })
 });

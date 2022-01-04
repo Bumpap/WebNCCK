@@ -28,7 +28,12 @@ io.on('connection', (socket) => {
   socket.on('post message', (data) => {
     socket.broadcast.emit('post message', data);
   });
+  socket.on('notifi message', (data) => {
+    socket.broadcast.emit('notifi message', data);
+  });
 });
+
+
 
 /**
  * Listen on provided port, on all network interfaces.
