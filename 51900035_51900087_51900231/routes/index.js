@@ -201,6 +201,32 @@ router.get('/allNotifi', isLoggedIn, function (req, res, next) {
 });
 
 
+router.get('/myNotification', isLoggedIn, function (req, res, next) {
+  if (req.user) {
+    user = req.user
+  } else {
+    user = temp1
+    //console.log(temp1)
+  }
+  Notifi.find({ creator: user.name }, function (err, result) {
+    if (err) console.log(err);
+
+    else {
+      res.render('myNotification', { username: user.name, email: user.email, avatar: user.avatar, content: user.content, result: result });
+    }
+  })
+});
+
+
+router.post('/deleteNotifi', isLoggedIn, function (req, res, next) {
+  Notifi.deleteOne({ _id: ObjectId((req.body.id)) }, function (err, result) {
+    if (err) console.log(err);
+    else {
+      res.send(req.body.id);
+    }
+  })
+})
+
 router.get('/createAccount', isLoggedIn, function (req, res, next) {
   if (req.user) {
     user = req.user
