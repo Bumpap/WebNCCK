@@ -100,7 +100,6 @@ $(document).ready(function () {
                             //console.log(avatar);
                             //console.log(JSON.parse(data))
                             //var image = document.getElementById('customFile').value;
-
                             var datetime = new Date(new Date());
                             datetime.toUTCString();
                             console.log(datetime);

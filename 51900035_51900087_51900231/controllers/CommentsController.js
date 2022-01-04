@@ -24,10 +24,10 @@ class CommentsController {
 
 
 
-    // async list(req, res) {
-    //     let comments = await Comment.find().sort([[]]);
-    //     res.json(comments);
-    // }
+    async list(req, res) {
+        let comments = await Comment.find().sort([[]]);
+        res.json(comments);
+    }
 }
 
 module.exports = new CommentsController

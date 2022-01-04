@@ -46,26 +46,24 @@ $(document).ready(function () {
                             let comment = document.getElementById('user-status-comment').value;
                             let avatar = document.getElementById('avatar').src;
                             //var image = document.getElementById('customFile').value;
-                            var datetime = new Date().toLocaleString().replace(",", "").replace("/:.. /", " ");
+                            // var datetime = new Date().toLocaleString().replace(",", "").replace("/:.. /", " ");
                             //emit data after post 
                             var temp = document.getElementsByTagName("template")[2];
                             var clone = temp.content.cloneNode(true);
-                            var nameCmt = clone.querySelector("#namecmt");
-                            nameCmt.innerHTML = username;
-                            console.log(username)
+                            var nameCmt = clone.querySelector("#comment-name");
+                            nameCmt.innerHTML = username;            
                             var avtCmt = clone.querySelector("#avatarcmt");
                             avtCmt.src = avatar;
-                            console.log(avatar)
                             var contentCmt = clone.querySelector("#user-comments");
-                            contentCmt.value = comment;
-                            console.log(comment)
-                            
-                            var datetime = clone.querySelector("#date-time");
+                            contentCmt.innerHTML = comment;
+                            var date_time = clone.querySelector("#date-time");
                             var date = new Date(new Date());
-                            datetime.innerHTML = date.toUTCString()
-                            console.log(date)
-
+                            date_time.innerHTML = date.toUTCString()
+                            // console.log(date)
+                            console.log(document.getElementById('user-status-comment').value)
+                            document.getElementById('cmt').prepend(clone);
                             document.getElementById('user-status-comment').value = '';
+                            
                         } else {
                             console.log("error")
                         }

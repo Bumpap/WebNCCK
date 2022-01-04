@@ -4,6 +4,6 @@ var commentsController = require('../controllers/CommentsController')
 
 router.post('/create', commentsController.create);
 
-// router.get('/list', commentsController.list);
+router.get('/list', commentsController.list);
 
 module.exports = router;
