@@ -1,6 +1,6 @@
 <nav class="navbar navbar-light bg-white">
     <a href="/" class="navbar-brand">HỆ THỐNG THÔNG TIN SINH VIÊN</a>
-    <form class="form-inline" method="POST">
+    {{!-- <form class="form-inline" method="POST">
         <div class="input-group">
             <input id="contentPost" name="contentPost" type="text" class="form-control"
                 aria-label="Recipient's username" aria-describedby="button-addon2">
@@ -12,7 +12,7 @@
                 </a>
             </div>
         </div>
-    </form>
+    </form> --}}
     <a href="/logout" class="btn btn-info btn-lg">
         <span class="glyphicon glyphicon-log-out"></span> Log out
     </a>
@@ -36,7 +36,7 @@
                     <a id="username" name="username" class="h5">{{name}}</a>
                     {{/if}}
 
-                    <div class="h7 text-muted">{{email}}</div>
+                    <div class="h7 text-muted" name="email" id="email">{{email}}</div>
                 </div>
                 <ul class="list-group list-group-flush">
 
@@ -234,12 +234,12 @@
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="mr-2">
-                                        <img id="avt_post" name="avt_post" class="rounded-circle" width="45" src=""
-                                            alt="">
+                                        <img id="avt_post" name="avt_post" class="rounded-circle" width="45" alt="">
                                     </div>
                                     <div class="ml-2">
-                                        <div class="h5 m-0" id="display-name">@LeeCross</div>
-
+                                        <a href="/myProfile">
+                                            <div class="h5 m-0" name="display_name" id="display_name">@LeeCross</div>
+                                        </a>
                                     </div>
                                 </div>
 
@@ -248,9 +248,6 @@
                         </div>
                         <div class="card-body">
                             <div class="text-muted h7 mb-2" id="datetime"> <i class="fa fa-clock-o"></i>10 min ago</div>
-                            {{!-- <a class="card-link" href="#">
-                                <h5 class="card-title">Lorem ipsum dolor sit amet, consectetur adip.</h5>
-                            </a> --}}
 
                             <p id="user-status" class="card-text">
                                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo recusandae nulla rem eos
@@ -272,7 +269,7 @@
         </div>
 
 
-        <div class="col-md-3">
+        {{!-- <div class="col-md-3">
             {{#if student}}
             <div class="card gedf-card">
                 <template>
@@ -301,7 +298,7 @@
             </div>
             {{/if}}
 
-        </div>
+        </div> --}}
 
     </div>
 </div>
@@ -329,7 +326,7 @@
 </div>
 
 {{!-- commentModal chua xong --}}
-<div class="modal fade" id="commentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+{{!-- <div class="modal fade" id="commentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -359,4 +356,4 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}

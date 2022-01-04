@@ -90,11 +90,6 @@ $(document).ready(function () {
             contentType: "application/json",
             data: JSON.stringify({ id: id, content: user_edit }),
             success: function (res) {
-
-                // let div = document.getElementById(res.id);
-
-                // div.querySelector(".card-text").innerHTML(res.content);
-
                 console.log(res);
             }
 

@@ -11,6 +11,7 @@ class PostController {
             content: req.body.content,
             creator: req.user.name, //lấy username từ session
             avatar: req.user.avatar,
+            email: req.user.email,
             created_at: new Date(),
             updated_at: new Date()
         }).save(function (err) {

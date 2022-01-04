@@ -15,16 +15,12 @@ $(document).ready(function () {
                     var clone = temp.content.cloneNode(true);
                     var cardbody = clone.querySelector(".card-body");
                     cardbody.setAttribute('id', data[i]._id);
-                    var nameEl = clone.querySelector("#display-name");
+                    var nameEl = clone.querySelector("#display_name");
                     nameEl.innerHTML = data[i].creator;
                     var avtEL = clone.querySelector("#avt_post");
                     avtEL.src = data[i].avatar;
                     var statusEl = clone.querySelector("#user-status");
                     statusEl.innerHTML = data[i].content;
-                    // var deleteBtn = clone.querySelector("#delete");
-                    // deleteBtn.setAttribute('data-id', data[i]._id);
-                    // var editBtn = clone.querySelector("#edit");
-                    // editBtn.setAttribute('data-id', data[i]._id);
                     var datetimeEl = clone.querySelector("#datetime");
                     var date = new Date(data[i].created_at)
                     datetimeEl.innerHTML = date.toUTCString()
@@ -54,7 +50,7 @@ $(document).ready(function () {
     function insertPost(username, message, datetime, avatar) {
         var temp = document.getElementsByTagName("template")[0];
         var clone = temp.content.cloneNode(true);
-        var nameEl = clone.querySelector("#display-name");
+        var nameEl = clone.querySelector("#display_name");
         var avtEL = clone.querySelector("#avt_post");
         avtEL.src = avatar;
         nameEl.innerHTML = username;
@@ -68,10 +64,12 @@ $(document).ready(function () {
     document.getElementById("postBtn").onclick = function (e) {
         e.preventDefault();
         var a = document.getElementById('content').value
+        //console.log(a)
         let data = {
             content: document.getElementById('content').value,
             creator: document.getElementById('username').innerHTML,
-            avatar: document.getElementById('avatar').src
+            avatar: document.getElementById('avatar').src,
+            email: document.getElementById('email').innerHTML
         }
         if (a == '') {
             alert("Null");
@@ -96,6 +94,10 @@ $(document).ready(function () {
                             let username = document.getElementById('username').innerHTML;
                             let message = document.getElementById('content').value;
                             let avatar = document.getElementById('avatar').src;
+                            //console.log(avatar);
+                            //console.log(JSON.parse(data))
+                            //var image = document.getElementById('customFile').value;
+
                             var datetime = new Date(new Date());
                             datetime.toUTCString();
                             console.log(datetime);
@@ -109,4 +111,6 @@ $(document).ready(function () {
                     })
                 })
     }
+
+    //post notificatio
 })

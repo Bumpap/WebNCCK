@@ -5,9 +5,10 @@
  */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-  typeof define === 'function' && define.amd ? define(factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.io = factory());
-})(this, (function () { 'use strict';
+    typeof define === 'function' && define.amd ? define(factory) :
+      (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.io = factory());
+})(this, (function () {
+  'use strict';
 
   function _typeof(obj) {
     "@babel/helpers - typeof";
@@ -102,7 +103,7 @@
     if (typeof Proxy === "function") return true;
 
     try {
-      Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
+      Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () { }));
       return true;
     } catch (e) {
       return false;
@@ -132,7 +133,7 @@
 
     return function _createSuperInternal() {
       var Super = _getPrototypeOf(Derived),
-          result;
+        result;
 
       if (hasNativeReflectConstruct) {
         var NewTarget = _getPrototypeOf(this).constructor;
@@ -201,7 +202,7 @@
         if (it) o = it;
         var i = 0;
 
-        var F = function () {};
+        var F = function () { };
 
         return {
           s: F,
@@ -225,8 +226,8 @@
     }
 
     var normalCompletion = true,
-        didErr = false,
-        err;
+      didErr = false,
+      err;
     return {
       s: function () {
         it = it.call(o);
@@ -261,16 +262,16 @@
 
   var parseuri = function parseuri(str) {
     var src = str,
-        b = str.indexOf('['),
-        e = str.indexOf(']');
+      b = str.indexOf('['),
+      e = str.indexOf(']');
 
     if (b != -1 && e != -1) {
       str = str.substring(0, b) + str.substring(b, e).replace(/:/g, ';') + str.substring(e, str.length);
     }
 
     var m = re.exec(str || ''),
-        uri = {},
-        i = 14;
+      uri = {},
+      i = 14;
 
     while (i--) {
       uri[parts[i]] = m[i] || '';
@@ -290,7 +291,7 @@
 
   function pathNames(obj, path) {
     var regx = /\/{2,9}/g,
-        names = path.replace(regx, "/").split("/");
+      names = path.replace(regx, "/").split("/");
 
     if (path.substr(0, 1) == '/' || path.length === 0) {
       names.splice(0, 1);
@@ -371,7 +372,7 @@
     return obj;
   }
 
-  var hasCors = {exports: {}};
+  var hasCors = { exports: {} };
 
   /**
    * Module exports.
@@ -402,19 +403,19 @@
   })();
 
   // browser shim for xmlhttprequest module
-  function XMLHttpRequest$1 (opts) {
+  function XMLHttpRequest$1(opts) {
     var xdomain = opts.xdomain; // XMLHttpRequest can be disabled on IE
 
     try {
       if ("undefined" !== typeof XMLHttpRequest && (!xdomain || hasCORS)) {
         return new XMLHttpRequest();
       }
-    } catch (e) {}
+    } catch (e) { }
 
     if (!xdomain) {
       try {
         return new globalThis[["Active"].concat("Object").join("X")]("Microsoft.XMLHTTP");
-      } catch (e) {}
+      } catch (e) { }
     }
   }
 
@@ -570,7 +571,7 @@
   Emitter.prototype.emit = function (event) {
     this._callbacks = this._callbacks || {};
     var args = new Array(arguments.length - 1),
-        callbacks = this._callbacks['$' + event];
+      callbacks = this._callbacks['$' + event];
 
     for (var i = 1; i < arguments.length; i++) {
       args[i - 1] = arguments[i];
@@ -641,7 +642,7 @@
 
   var encodePacket = function encodePacket(_ref, supportsBinary, callback) {
     var type = _ref.type,
-        data = _ref.data;
+      data = _ref.data;
 
     if (withNativeBlob$1 && data instanceof Blob) {
       if (supportsBinary) {
@@ -687,13 +688,13 @@
 
   var decode$1 = function decode(base64) {
     var bufferLength = base64.length * 0.75,
-        len = base64.length,
-        i,
-        p = 0,
-        encoded1,
-        encoded2,
-        encoded3,
-        encoded4;
+      len = base64.length,
+      i,
+      p = 0,
+      encoded1,
+      encoded2,
+      encoded3,
+      encoded4;
 
     if (base64[base64.length - 1] === '=') {
       bufferLength--;
@@ -704,7 +705,7 @@
     }
 
     var arraybuffer = new ArrayBuffer(bufferLength),
-        bytes = new Uint8Array(arraybuffer);
+      bytes = new Uint8Array(arraybuffer);
 
     for (i = 0; i < len; i += 4) {
       encoded1 = lookup$1[base64.charCodeAt(i)];
@@ -963,11 +964,11 @@
   }(Emitter_1);
 
   var alphabet = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-_'.split(''),
-      length = 64,
-      map = {},
-      seed = 0,
-      i = 0,
-      prev;
+    length = 64,
+    map = {},
+    seed = 0,
+    i = 0,
+    prev;
   /**
    * Return a string representing the specified number.
    *
@@ -1289,7 +1290,7 @@
    * Empty function
    */
 
-  function empty() {}
+  function empty() { }
 
   var hasXHR2 = function () {
     var xhr = new XMLHttpRequest$1({
@@ -1458,17 +1459,17 @@
                 }
               }
             }
-          } catch (e) {}
+          } catch (e) { }
 
           if ("POST" === this.method) {
             try {
               xhr.setRequestHeader("Content-type", "text/plain;charset=UTF-8");
-            } catch (e) {}
+            } catch (e) { }
           }
 
           try {
             xhr.setRequestHeader("Accept", "*/*");
-          } catch (e) {} // ie6 check
+          } catch (e) { } // ie6 check
 
 
           if ("withCredentials" in xhr) {
@@ -1563,7 +1564,7 @@
         if (fromError) {
           try {
             this.xhr.abort();
-          } catch (e) {}
+          } catch (e) { }
         }
 
         if (typeof document !== "undefined") {
@@ -1770,7 +1771,7 @@
                 // TypeError is thrown when passing the second argument on Safari
                 _this3.ws.send(data);
               }
-            } catch (e) {}
+            } catch (e) { }
 
             if (lastPacket) {
               // fake drain
@@ -2679,22 +2680,22 @@
     _createClass(Encoder, [{
       key: "encode",
       value:
-      /**
-       * Encode a packet as a single string if non-binary, or as a
-       * buffer sequence, depending on packet type.
-       *
-       * @param {Object} obj - packet object
-       */
-      function encode(obj) {
-        if (obj.type === PacketType.EVENT || obj.type === PacketType.ACK) {
-          if (hasBinary(obj)) {
-            obj.type = obj.type === PacketType.EVENT ? PacketType.BINARY_EVENT : PacketType.BINARY_ACK;
-            return this.encodeAsBinary(obj);
+        /**
+         * Encode a packet as a single string if non-binary, or as a
+         * buffer sequence, depending on packet type.
+         *
+         * @param {Object} obj - packet object
+         */
+        function encode(obj) {
+          if (obj.type === PacketType.EVENT || obj.type === PacketType.ACK) {
+            if (hasBinary(obj)) {
+              obj.type = obj.type === PacketType.EVENT ? PacketType.BINARY_EVENT : PacketType.BINARY_ACK;
+              return this.encodeAsBinary(obj);
+            }
           }
-        }
 
-        return [this.encodeAsString(obj)];
-      }
+          return [this.encodeAsString(obj)];
+        }
       /**
        * Encode packet as string.
        */
@@ -2831,7 +2832,7 @@
         if (p.type === PacketType.BINARY_EVENT || p.type === PacketType.BINARY_ACK) {
           var start = i + 1;
 
-          while (str.charAt(++i) !== "-" && i != str.length) {}
+          while (str.charAt(++i) !== "-" && i != str.length) { }
 
           var buf = str.substring(start, i);
 
@@ -2893,14 +2894,14 @@
     }, {
       key: "destroy",
       value:
-      /**
-       * Deallocates a parser's resources
-       */
-      function destroy() {
-        if (this.reconstructor) {
-          this.reconstructor.finishedReconstruction();
+        /**
+         * Deallocates a parser's resources
+         */
+        function destroy() {
+          if (this.reconstructor) {
+            this.reconstructor.finishedReconstruction();
+          }
         }
-      }
     }], [{
       key: "isPayloadValid",
       value: function isPayloadValid(type, payload) {
@@ -2995,7 +2996,7 @@
   var parser = /*#__PURE__*/Object.freeze({
     __proto__: null,
     protocol: protocol,
-    get PacketType () { return PacketType; },
+    get PacketType() { return PacketType; },
     Encoder: Encoder,
     Decoder: Decoder
   });
@@ -3159,7 +3160,7 @@
         var isTransportWritable = this.io.engine && this.io.engine.transport && this.io.engine.transport.writable;
         var discardPacket = this.flags["volatile"] && (!isTransportWritable || !this.connected);
 
-        if (discardPacket) ; else if (this.connected) {
+        if (discardPacket); else if (this.connected) {
           this.packet(packet);
         } else {
           this.sendBuffer.push(packet);
@@ -3358,7 +3359,7 @@
           var listeners = this._anyListeners.slice();
 
           var _iterator = _createForOfIteratorHelper(listeners),
-              _step;
+            _step;
 
           try {
             for (_iterator.s(); !(_step = _iterator.n()).done;) {

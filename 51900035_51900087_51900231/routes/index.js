@@ -252,30 +252,32 @@ router.post('/createAccount', isLoggedIn, function (req, res, next) {
   }
 });
 
-router.get('/viewPost', isLoggedIn, function (req, res, next) {
+router.get('/myProfile', isLoggedIn, function (req, res, next) {
   if (req.user) {
     user = req.user
   } else {
     user = temp1
     //console.log(temp1)
   }
-  res.render('viewPost', { username: user.name, email: user.email, avatar: user.avatar })
-
+  // console.log(req.body)
+  //console.log(req.body.contentPost)
+  res.render('myProfile', { username: Post.name, email: Post.email, avatar: Post.avatar, content: Post.content });
 });
 
-router.post('/viewPost', isLoggedIn, function (req, res, next) {
+
+router.post('/myProfile', isLoggedIn, function (req, res, next) {
   if (req.user) {
     user = req.user
   } else {
     user = temp1
     //console.log(temp1)
-
   }
+  //console.log(req.body.display_name)
   //console.log(req.body.contentPost)
-  Post.find({ creator: req.body.contentPost }, function (err, result) {
+  Post.find({ creator: req.body.display_name }, function (err, result) {
     if (err) console.log(err);
     else {
-      res.render('viewPost', { username: user.name, email: user.email, avatar: user.avatar, result: result });
+      res.render('myProfile', { username: Post.name, email: Post.email, avatar: Post.avatar, content: Post.content, result: result });
     }
   })
 });
