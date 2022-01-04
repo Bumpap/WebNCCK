@@ -14,7 +14,7 @@ $(document).ready(function () {
                     cardbody.setAttribute('id', data[i]._id);
                     var nameCmt = clone.querySelector("#comment-name");
                     nameCmt.innerHTML = data[i].creator;
-                    console.log(username)            
+                    console.log(username)
                     var avtCmt = clone.querySelector("#avatarcmt");
                     avtCmt.src = data[i].avatar;
                     var contentCmt = clone.querySelector("#user-comments");
@@ -93,7 +93,7 @@ $(document).ready(function () {
                             var temp = document.getElementsByTagName("template")[2];
                             var clone = temp.content.cloneNode(true);
                             var nameCmt = clone.querySelector("#comment-name");
-                            nameCmt.innerHTML = username;            
+                            nameCmt.innerHTML = username;
                             var avtCmt = clone.querySelector("#avatarcmt");
                             avtCmt.src = avatar;
                             var contentCmt = clone.querySelector("#user-comments");
@@ -105,7 +105,7 @@ $(document).ready(function () {
                             console.log(document.getElementById('user-status-comment').value)
                             document.getElementById('cmt').prepend(clone);
                             document.getElementById('user-status-comment').value = '';
-                            
+
                         } else {
                             console.log("error")
                         }
