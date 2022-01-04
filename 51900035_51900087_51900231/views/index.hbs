@@ -13,9 +13,9 @@
             </div>
         </div>
     </form> --}}
-    <a href="/logout" class="btn btn-info btn-lg">
+    {{!-- <a href="/logout" class="btn btn-info btn-lg">
         <span class="glyphicon glyphicon-log-out"></span> Log out
-    </a>
+    </a> --}}
 </nav>
 
 <div class="container-fluid gedf-wrapper">
@@ -41,32 +41,39 @@
                 <ul class="list-group list-group-flush">
 
                     {{#if admin}}
+
+                    <li class="list-group-item">
+                        <a href="/logout">
+                            <div class="h6 text-muted"><i class="fas fa-sign-out-alt"></i> Log out</div>
+                        </a>
+
+                    </li>
                     <li class="list-group-item">
                         <a href="/createAccount">
-                            <div class="h6 text-muted">Create Account</div>
+                            <div class="h6 text-muted"><i class="fas fa-plus-square"></i> Create Account</div>
                         </a>
 
                     </li>
                     <li class="list-group-item">
                         <a href="/manageAccount">
-                            <div class="h6 text-muted">Manage Account</div>
+                            <div class="h6 text-muted"> <i class="fas fa-tasks"></i> Manage Account</div>
                         </a>
                     </li>
                     <li class="list-group-item">
                         <a href="/changePWD">
-                            <div class="h6 text-muted">Change Password</div>
+                            <div class="h6 text-muted"><i class="fas fa-exchange-alt"></i> Change Password</div>
                         </a>
                     </li>
 
                     <li class="list-group-item">
                         <a href="/myNotification" id="allpost">
-                            <div class="h6 text-muted">My Notifications</div>
+                            <div class="h6 text-muted"><i class="fas fa-bell"></i> My Notifications</div>
                         </a>
 
                     </li>
                     <li class="list-group-item">
                         <a href="/allNotifi" id="allpost">
-                            <div class="h6 text-muted">All Notifications</div>
+                            <div class="h6 text-muted"><i class="fas fa-bullhorn"></i> All Notifications</div>
                         </a>
 
                     </li>
@@ -74,20 +81,26 @@
 
                     {{#if faculty}}
                     <li class="list-group-item">
+                        <a href="/logout">
+                            <div class="h6 text-muted"><i class="fas fa-sign-out-alt"></i> Log out</div>
+                        </a>
+
+                    </li>
+                    <li class="list-group-item">
                         <a href="/changePWD">
-                            <div class="h6 text-muted">Change Password</div>
+                            <div class="h6 text-muted"> <i class="fas fa-exchange-alt"></i> Change Password</div>
                         </a>
                     </li>
 
                     <li class="list-group-item">
                         <a href="/myNotification" id="allpost">
-                            <div class="h6 text-muted">My Notifications</div>
+                            <div class="h6 text-muted"> <i class="fas fa-bell"></i> My Notifications</div>
                         </a>
 
                     </li>
                     <li class="list-group-item">
                         <a href="/allNotifi" id="allpost">
-                            <div class="h6 text-muted">All Notifications</div>
+                            <div class="h6 text-muted"><i class="fas fa-bullhorn"></i> All Notifications</div>
                         </a>
 
                     </li>
@@ -95,15 +108,22 @@
 
                     {{#if student}}
                     <li class="list-group-item">
+                        <a href="/logout">
+
+                            <div class="h6 text-muted"><i class="fas fa-sign-out-alt"></i> Log out</div>
+                        </a>
+
+                    </li>
+                    <li class="list-group-item">
                         <a href="/allpost" id="allpost">
-                            <div class="h6 text-muted">Posts</div>
+                            <div class="h6 text-muted"><i class="fas fa-mail-bulk"></i> My Posts</div>
                         </a>
 
                     </li>
 
                     <li class="list-group-item">
                         <a href="/allNotifi" id="allpost">
-                            <div class="h6 text-muted">Notifications</div>
+                            <div class="h6 text-muted"><i class="fas fa-bell"></i> Notifications</div>
                         </a>
 
                     </li>
@@ -289,19 +309,23 @@
 
         </div>
 
+        {{!-- <li class="list-group-item">
+            <div class="h6 text-muted" style="align-item: center; margin-left:100px;"> Notifications</div>
 
+        </li> --}}
         <div class="col-md-3" id="notifi">
+
             <template>
                 <div class="card gedf-card">
                     <div class="toast">
                         <div class="toast__icon">
-                            <i class="fas fa-check-circle"></i>
+                            <i class="fas fa-bell"></i>
                         </div>
                         <div class="toast__body">
                             <h3 class="toast__title">Notifications</h3>
                             <p class="toast__msg" id="notifToast" name="notifToast">Khoa đã đăng một thông báo mới!</p>
                         </div>
-                        <div class="toast__close">
+                        <div class="toast__close" id="toast__close">
                             <i class="fas fa-times"></i>
                         </div>
                     </div>

@@ -161,7 +161,6 @@ router.post('/editPostBtn', isLoggedIn, function (req, res, next) {
 router.post('/saveEdit', isLoggedIn, function (req, res, next) {
   Post.findOne({ _id: ObjectId((req.body.id)) }, function (err, result) {
     if (err) console.log(err);
-
     else {
       res.send(req.body);
     }
@@ -300,30 +299,18 @@ router.get('/myProfile', isLoggedIn, function (req, res, next) {
     user = req.user
   } else {
     user = temp1
-    //console.log(temp1)
-  }
-  // console.log(req.body)
-  //console.log(req.body.contentPost)
-  res.render('myProfile', { username: Post.name, email: Post.email, avatar: Post.avatar, content: Post.content });
-});
 
-
-router.post('/myProfile', isLoggedIn, function (req, res, next) {
-  if (req.user) {
-    user = req.user
-  } else {
-    user = temp1
-    //console.log(temp1)
   }
-  //console.log(req.body.display_name)
-  //console.log(req.body.contentPost)
-  Post.find({ creator: req.body.display_name }, function (err, result) {
+  Post.find({ creator: user.name }, function (err, result) {
     if (err) console.log(err);
     else {
-      res.render('myProfile', { username: Post.name, email: Post.email, avatar: Post.avatar, content: Post.content, result: result });
+      res.render('allpost', { username: user.name, email: user.email, avatar: user.avatar, content: user.content, result: result });
     }
   })
+  //console.log(document.getElementById('display_name').innerHTML)
+
 });
+
 
 router.get('/', isLoggedIn, function (req, res, next) {
   if (req.user) {

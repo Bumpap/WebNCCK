@@ -15,10 +15,8 @@ $(document).ready(function () {
                     var clone = temp.content.cloneNode(true);
                     var cardbody = clone.querySelector(".form-control");
                     cardbody.setAttribute('id', data[i]._id);
-
                     var comment = clone.querySelector("#comment");
                     comment.setAttribute('id', data[i]._id);
-
                     var nameEl = clone.querySelector("#display_name");
                     nameEl.innerHTML = data[i].creator;
                     var avtEL = clone.querySelector("#avt_post");
