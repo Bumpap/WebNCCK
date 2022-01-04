@@ -1,5 +1,5 @@
 <nav class="navbar navbar-light bg-white">
-    <a href="/" class="navbar-brand">HỆ THỐNG THÔNG TIN SINH VIÊN</a>
+    <a href="/" class="navbar-brand" style="font-weight: bold;">HỆ THỐNG THÔNG TIN SINH VIÊN</a>
     {{!-- <form class="form-inline" method="POST">
         <div class="input-group">
             <input id="contentPost" name="contentPost" type="text" class="form-control"
@@ -25,7 +25,7 @@
                 <div class="card-body">
                     <img class="avatar" id="avatar" src="{{avatar}}" alt="Avatar">
                     <br>
-                    <br>
+
                     {{#if student}}
                     <a href="/profile-user" name="username" id="username" class="h5">{{name}}</a>
                     {{/if}}
@@ -336,26 +336,6 @@
 </div>
 
 <!-- editModal -->
-<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-    aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <textarea class="form-control" name="edit-content" id="user-status-edit" rows="3"></textarea>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="editBtn">Save changes</button>
-            </div>
-        </div>
-    </div>
-</div>
 
 {{!-- commentModal chua xong --}}
 <div class="modal fade" id="commentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
