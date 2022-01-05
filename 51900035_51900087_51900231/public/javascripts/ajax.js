@@ -95,7 +95,6 @@ $(document).ready(function () {
                 console.log(b);
                 console.log(id);
             }
-
         })
     })
 
@@ -103,7 +102,6 @@ $(document).ready(function () {
         event.preventDefault();
         let id = $(event.target).data("id");
         let user_edit = document.getElementById("user-status-edit").value;
-
         $.ajax({
             url: "/saveEdit",
             method: "POST",
@@ -115,5 +113,29 @@ $(document).ready(function () {
 
         })
     })
+
+
+    $("body").on("click", "#myProfile", (event) => {
+        // event.preventDefault();
+        let id = $(event.target).data("id");
+        console.log(id)
+        let content = document.getElementById("display_name").innerHTML;
+        console.log(content)
+        $.ajax({
+            url: "/myProfile",
+            method: "POST",
+            contentType: "application/json",
+            data: JSON.stringify({ content: content }),
+            success: function (res) {
+                console.log(res);
+            }
+
+        })
+    })
+
+    // document.getElementById("#myProfile").onclick = function () {
+    //     let content = document.getElementById("display_name").innerHTML;
+    //     console.log(content)
+    // }
 
 })

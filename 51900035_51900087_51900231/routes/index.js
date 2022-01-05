@@ -294,17 +294,25 @@ router.post('/createAccount', isLoggedIn, function (req, res, next) {
   }
 });
 
+
 router.get('/myProfile', isLoggedIn, function (req, res, next) {
+  //console.log(req.body.content)
+  res.render('myProfile', { username: user.name, email: user.email, avatar: user.avatar, content: user.content });
+})
+
+router.post('/myProfile', isLoggedIn, function (req, res, next) {
   if (req.user) {
     user = req.user
   } else {
     user = temp1
 
   }
-  Post.find({ creator: user.name }, function (err, result) {
+  //console.log(req.body.content + "Hello")
+  Post.find({ creator: req.body.content }, function (err, result) {
     if (err) console.log(err);
     else {
-      res.render('allpost', { username: user.name, email: user.email, avatar: user.avatar, content: user.content, result: result });
+      console.log(result)
+      res.render('myProfile', { username: user.name, email: user.email, avatar: user.avatar, content: user.content, result: result });
     }
   })
   //console.log(document.getElementById('display_name').innerHTML)

@@ -379,9 +379,9 @@ td, th {
 .toast__icon, .toast__close{
 	padding: 0 16px;
 }
-.toast__body{
+/* .toast__body{
 
-}
+} */
 .toast__title{
 	font-size: 16px;
 	font-weight: 600;
